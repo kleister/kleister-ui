@@ -1,7 +1,7 @@
 //
 // Use this server to run this project in standalone mode to avoid having to
-// re-compile your Go code and re-launch Solder every time you make a code
-// change. This server proxies all traffic to a running Solder instance. This
+// re-compile your Go code and re-launch Kleister every time you make a code
+// change. This server proxies all traffic to a running Kleister instance. This
 // can be a local instance, or a remote instance, so you can develop against
 // real world data.
 //

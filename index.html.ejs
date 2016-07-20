@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+
+    <meta content="Manage mod packs for Minecraft" name="description" />
+    <meta content="Kleister Team" name="author" />
+
+    <title>Kleister</title>
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
+
+    <% for (var i = 0; i < htmlWebpackPlugin.files.css.length; i++) { %>
+      <link href="<%= htmlWebpackPlugin.files.css[i] %>" rel="stylesheet" />
+    <% } %>
+  </head>
+  <body role="document">
+    <div id="kleister"></div>
+
+    <% for (var i = 0; i < htmlWebpackPlugin.files.js.length; i++) { %>
+      <script src="<%= htmlWebpackPlugin.files.js[i] %>"></script>
+    <% } %>
+  </body>
+</html>

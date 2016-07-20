@@ -1,11 +1,15 @@
-# Solder: Web UI
+# Kleister: Web UI
 
-[![Build Status](http://github.dronehippie.de/api/badges/solderapp/solder-ui/status.svg)](http://github.dronehippie.de/solderapp/solder-ui)
-[![Coverage Status](http://coverage.dronehippie.de/badges/solderapp/solder-ui/coverage.svg)](http://coverage.dronehippie.de/solderapp/solder-ui)
-[![Join the chat at https://gitter.im/solderapp/solder](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/solderapp/solder-api)
+[![Build Status](http://github.dronehippie.de/api/badges/kleister/kleister-ui/status.svg)](http://github.dronehippie.de/kleister/kleister-ui)
+[![Coverage Status](http://coverage.dronehippie.de/badges/kleister/kleister-ui/coverage.svg)](http://coverage.dronehippie.de/kleister/kleister-ui)
+[![Join the chat at https://gitter.im/kleister/kleister](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kleister/kleister)
 ![Release Status](https://img.shields.io/badge/status-beta-yellow.svg?style=flat)
 
 **This project is under heavy development, it's not in a working state yet!**
+
+Where does this name come from or what does it mean? It's quite simple, it's one
+german word for paste/glue, I thought it's a good match as it glues together the
+modpacks for Minecraft.
 
 
 ## Build
@@ -15,19 +19,24 @@ won't be covered by those instructions. To build the sources just execute the
 following command after NodeJS setup:
 
 ```
-make
+npm install
+npm run build
 ```
 
 
-## Running
+## Development
 
-We are using a simple proxy written in Go that forwards the API requests to a
-server instance running whereever you want. We are open for improvements to get
-a better behavior.
+To start developing on this UI you have to execute only a few commands. To setup
+a NodeJS environment or even a Go environment is out of the scope of this
+document. To start development just execute those commands:
 
 ```
-go run server.go --scheme http --addr localhost:8080
+npm install
+npm run start -- --host localhost:8080
 ```
+
+The development server proxies all requests to the define host. So in order to
+properly work with it you need to start the API separately.
 
 After launching this command on a terminal you can access the web interface at
 [http://localhost:9000](http://localhost:9000)
