@@ -2,6 +2,7 @@
 
 [![Build Status](http://github.dronehippie.de/api/badges/kleister/kleister-ui/status.svg)](http://github.dronehippie.de/kleister/kleister-ui)
 [![Coverage Status](http://coverage.dronehippie.de/badges/kleister/kleister-ui/coverage.svg)](http://coverage.dronehippie.de/kleister/kleister-ui)
+[![](https://images.microbadger.com/badges/image/kleister/kleister-ui.svg)](http://microbadger.com/images/kleister/kleister-ui "Get your own image badge on microbadger.com")
 [![Join the chat at https://gitter.im/kleister/kleister](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kleister/kleister)
 ![Release Status](https://img.shields.io/badge/status-beta-yellow.svg?style=flat)
 
