@@ -2,6 +2,7 @@ FROM alpine:edge
 MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
 EXPOSE 9000
+VOLUME ["/var/lib/kleister"]
 
 RUN apk update && \
   apk add \
@@ -13,13 +14,15 @@ RUN apk update && \
     -g 1000 \
     kleister && \
   adduser -D \
-    -h /home/kleister \
+    -h /var/lib/kleister \
     -s /bin/bash \
     -G kleister \
     -u 1000 \
     kleister
 
 COPY bin/kleister-ui /usr/bin/
+
+ENV KLEISTER_UI_STORAGE /var/lib/kleister
 
 USER kleister
 ENTRYPOINT ["/usr/bin/kleister-ui"]
