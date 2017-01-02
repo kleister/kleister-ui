@@ -1,9 +1,15 @@
 DIST := dist
-EXECUTABLE := kleister-ui
 IMPORT := github.com/kleister/kleister-ui/server
 
+ifeq ($(OS), Windows_NT)
+	EXECUTABLE := kleister-ui.exe
+else
+	EXECUTABLE := kleister-ui
+endif
+
 SHA := $(shell git rev-parse --short HEAD)
-LDFLAGS += -s -w -extldflags "-static" -X "github.com/kleister/kleister-ui/main.VersionDev=$(SHA)"
+DATE := $(shell date -u '+%Y%m%d')
+LDFLAGS += -s -w -extldflags "-static" -X "$(IMPORT)/main.VersionDev=$(SHA)" -X "$(IMPORT)/main.VersionDate=$(DATE)"
 
 TARGETS ?= linux/*,darwin/*,windows/*
 PACKAGES ?= $(shell go list ./server/... | grep -v /vendor/)
