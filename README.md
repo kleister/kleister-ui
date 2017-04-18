@@ -32,11 +32,11 @@ exporting `GO15VENDOREXPERIMENT=1` within our makefile you have to use a Go
 version `>= 1.6`
 
 ```bash
-go get -d github.com/umschlag/umschlag-ui
-cd $GOPATH/src/github.com/umschlag/umschlag-ui
+go get -d github.com/kleister/kleister-ui
+cd $GOPATH/src/github.com/kleister/kleister-ui
 make generate build
 
-bin/umschlag-ui -h
+bin/kleister-ui -h
 ```
 
 With the `make generate` command we are embedding all the static assets into the

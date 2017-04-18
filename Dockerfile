@@ -20,8 +20,10 @@ RUN apk update && \
     -u 1000 \
     kleister
 
+COPY dist/static /usr/share/kleister
 COPY kleister-ui /usr/bin/
 
+ENV KLEISTER_UI_ASSETS /usr/share/kleister
 ENV KLEISTER_UI_STORAGE /var/lib/kleister
 
 USER kleister
