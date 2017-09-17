@@ -34,7 +34,7 @@ func main() {
 
 	app := &cli.App{
 		Name:     "kleister-ui",
-		Version:  Version,
+		Version:  Version.String(),
 		Usage:    "Manage mod packs for Minecraft",
 		Compiled: time.Now(),
 
