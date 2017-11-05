@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: require('path').resolve(__dirname, 'dist', 'static'),
-    filename: 'assets/scripts/umschlag.js',
+    filename: 'assets/scripts/kleister.js',
     publicPath: '/'
   },
 
