@@ -22,7 +22,7 @@ RUN apk update && \
 COPY dist/static /usr/share/kleister
 
 ARG VERSION
-COPY dist/binaries/kleister-ui-$VERSION-linux-amd64 /usr/bin/
+COPY dist/binaries/kleister-ui-$VERSION-linux-arm-5 /usr/bin/
 
 ENV KLEISTER_UI_ASSETS /usr/share/kleister
 ENV KLEISTER_UI_STORAGE /var/lib/kleister
