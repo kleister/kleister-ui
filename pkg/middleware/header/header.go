@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/kleister/kleister-api/pkg/version"
+	"github.com/kleister/kleister-ui/pkg/version"
 )
 
 // Cache writes required cache headers to all requests.
