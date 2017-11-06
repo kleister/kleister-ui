@@ -18,7 +18,7 @@ COPY --from=alpine /etc/mime.types /etc/
 COPY dist/static /usr/share/kleister
 
 ARG VERSION
-COPY dist/binaries/kleister-ui-$VERSION-linux-amd64 /usr/bin/
+COPY dist/binaries/kleister-ui-$VERSION-linux-amd64 /usr/bin/kleister-ui
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>"
 LABEL org.label-schema.version=$VERSION
