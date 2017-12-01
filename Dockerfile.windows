@@ -1,4 +1,10 @@
+# escape=`
 FROM microsoft/nanoserver:10.0.14393.1593
+
+LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" `
+  org.label-schema.name="Kleister UI" `
+  org.label-schema.vendor="Thomas Boerger" `
+  org.label-schema.schema-version="1.0"
 
 EXPOSE 9000 80 443
 VOLUME ["\\kleister"]
@@ -9,11 +15,5 @@ ENV KLEISTER_UI_STORAGE /kleister
 ENTRYPOINT ["\\kleister-ui.exe"]
 CMD ["server"]
 
-LABEL maintainer="Thomas Boerger <thomas@webhippie.de>"
-LABEL org.label-schema.version=latest-windows
-LABEL org.label-schema.name="Kleister UI"
-LABEL org.label-schema.vendor="Thomas Boerger"
-LABEL org.label-schema.schema-version="1.0"
-
 COPY dist/static /assets
-COPY kleister-ui.exe /kleister-ui.exe
+COPY kleister-ui.exe kleister-ui.exe
