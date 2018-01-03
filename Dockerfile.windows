@@ -7,10 +7,10 @@ LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" `
   org.label-schema.schema-version="1.0"
 
 EXPOSE 9000 80 443
-VOLUME ["\\kleister"]
+VOLUME ["\\storage"]
 
-ENV KLEISTER_UI_ASSETS /assets
-ENV KLEISTER_UI_STORAGE /kleister
+ENV UMSCHLAG_UI_ASSETS /assets
+ENV UMSCHLAG_UI_STORAGE /storage
 
 ENTRYPOINT ["\\kleister-ui.exe"]
 CMD ["server"]

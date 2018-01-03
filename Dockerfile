@@ -8,8 +8,8 @@ LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
 EXPOSE 9000 80 443
 VOLUME ["/var/lib/kleister"]
 
-ENV KLEISTER_UI_ASSETS /usr/share/kleister
-ENV KLEISTER_UI_STORAGE /var/lib/kleister
+ENV UMSCHLAG_UI_ASSETS /usr/share/kleister
+ENV UMSCHLAG_UI_STORAGE /var/lib/kleister
 
 ENTRYPOINT ["/usr/bin/kleister-ui"]
 CMD ["server"]
