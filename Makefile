@@ -2,8 +2,6 @@ NAME := kleister-ui
 IMPORT := github.com/kleister/$(NAME)
 DIST := dist
 
-EXECUTABLE := $(NAME)
-
 ifeq ($(OS), Windows_NT)
 	EXECUTABLE := $(NAME).exe
 	HAS_RETOOL := $(shell where retool)
