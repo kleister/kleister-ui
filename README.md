@@ -1,12 +1,12 @@
 # Kleister: Web UI
 
 [![Build Status](http://github.dronehippie.de/api/badges/kleister/kleister-ui/status.svg)](http://github.dronehippie.de/kleister/kleister-ui)
-[![Go Doc](https://godoc.org/github.com/kleister/kleister-ui/server?status.svg)](http://godoc.org/github.com/kleister/kleister-ui/server)
-[![Go Report](http://goreportcard.com/badge/github.com/kleister/kleister-ui)](http://goreportcard.com/report/github.com/kleister/kleister-ui)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2522df1de54345468f1a7f81e3e3c383)](https://www.codacy.com/app/tboerger/kleister-ui?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kleister/kleister-ui&amp;utm_campaign=Badge_Grade)
-[![](https://images.microbadger.com/badges/image/kleister/kleister-ui.svg)](http://microbadger.com/images/kleister/kleister-ui "Get your own image badge on microbadger.com")
-[![Join the chat at https://gitter.im/kleister/kleister](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kleister/kleister)
 [![Stories in Ready](https://badge.waffle.io/kleister/kleister-api.svg?label=ready&title=Ready)](http://waffle.io/kleister/kleister-api)
+[![Join the Matrix chat at https://matrix.to/#/#kleister:matrix.org](https://img.shields.io/badge/matrix-%23kleister%3Amatrix.org-7bc9a4.svg)](https://matrix.to/#/#kleister:matrix.org)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/74862ecc4341446185e40b15a9032f64)](https://www.codacy.com/app/kleister/kleister-scripts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kleister/kleister-scripts&amp;utm_campaign=Badge_Grade)
+[![Go Doc](https://godoc.org/github.com/kleister/kleister-ui?status.svg)](http://godoc.org/github.com/kleister/kleister-ui)
+[![Go Report](http://goreportcard.com/badge/github.com/kleister/kleister-ui)](http://goreportcard.com/report/github.com/kleister/kleister-ui)
+[![](https://images.microbadger.com/badges/image/kleister/kleister-ui.svg)](http://microbadger.com/images/kleister/kleister-ui "Get your own image badge on microbadger.com")
 
 **This project is under heavy development, it's not in a working state yet!**
 
