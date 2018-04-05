@@ -25,7 +25,6 @@ _testmain.go
 
 coverage.out
 
-/kleister-ui
-
+/bin
 /dist
 /node_modules

@@ -16,4 +16,4 @@ ENTRYPOINT ["c:\\kleister-ui.exe"]
 CMD ["server"]
 
 COPY dist/static c:\assets
-COPY kleister-ui.exe c:\kleister-ui.exe
+COPY bin/kleister-ui.exe c:\kleister-ui.exe

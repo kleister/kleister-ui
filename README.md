@@ -10,28 +10,21 @@
 
 **This project is under heavy development, it's not in a working state yet!**
 
-Where does this name come from or what does it mean? It's quite simple, it's one
-german word for paste/glue, I thought it's a good match as it glues together the
-modpacks for Minecraft.
+Where does this name come from or what does it mean? It's quite simple, it's one german word for paste/glue, I thought it's a good match as it glues together the modpacks for Minecraft.
+
+Within this repository we are building the web interface for our [Kleister API](https://github.com/kleister/kleister-api) server, for further information take a look at our [documentation](https://kleister.webhippie.de).
 
 
 ## Build
 
-This project requires NodeJS to build the sources, the installation of NodeJS
-won't be covered by those instructions. To build the sources just execute the
-following command after NodeJS setup:
+This project requires NodeJS and Yarn to build the sources, the installation of NodeJS or Yarn won't be covered by these instructions, please follow the official documentation for [NodeJS](https://nodejs.org/en/download/package-manager/) and [Yarn](https://yarnpkg.com/lang/en/docs/install/). To build the sources just execute the following command after the setup:
 
 ```
 yarn install
 yarn build
 ```
 
-If you also want to publish it as a single binary with our server based on Go
-make sure you have a working Go environment, for further reference or a guide
-take a look at the [install instructions](http://golang.org/doc/install.html).
-As this project relies on vendoring of the dependencies and we are not
-exporting `GO15VENDOREXPERIMENT=1` within our makefile you have to use a Go
-version `>= 1.6`
+If you also want to publish it as a single binary with our server based on Go make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](http://golang.org/doc/install.html). This project requires Go >= v1.8.
 
 ```bash
 go get -d github.com/kleister/kleister-ui
@@ -41,28 +34,25 @@ make generate build
 ./kleister-ui -h
 ```
 
-With the `make generate` command we are embedding all the static assets into the
-binary so there is no need for any webserver or anything else beside launching
-this binary.
+With the `make generate` command we are embedding all the static assets into the binary so there is no need for any webserver or anything else beside launching this binary.
 
 
 ## Development
 
-To start developing on this UI you have to execute only a few commands. To setup
-a NodeJS environment or even a Go environment is out of the scope of this
-document. To start development just execute those commands:
+To start developing on this UI you have to execute only a few commands. To setup a NodeJS environment or even a Go environment is out of the scope of this document. To start development just execute those commands:
 
 ```
 yarn install
 yarn watch
-./kleister-ui --debug server --static dist/static/
+
+./kleister-ui --log-level debug server --static dist/static/
 ```
+The development server reloads the used assets on every request. So in order to properly work with it you need to start the API separately. After launching this command on a terminal you can access the web interface at [http://localhost:9000](http://localhost:9000).
 
-The development server reloads the used assets on every request. So in order to
-properly work with it you need to start the API separately.
 
-After launching this command on a terminal you can access the web interface at
-[http://localhost:9000](http://localhost:9000)
+## Security
+
+If you find a security issue please contact kleister@webhippie.de first.
 
 
 ## Contributing
@@ -83,5 +73,5 @@ Apache-2.0
 ## Copyright
 
 ```
-Copyright (c) 2016 Thomas Boerger <http://www.webhippie.de>
+Copyright (c) 2018 Thomas Boerger <thomas@webhippie.de>
 ```
