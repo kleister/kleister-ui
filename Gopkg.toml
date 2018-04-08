@@ -8,7 +8,7 @@
 
 [[constraint]]
   name = "github.com/go-kit/kit"
-  version = "0.6.0"
+  version = "0.7.0"
 
 [[constraint]]
   name = "github.com/joho/godotenv"
@@ -16,16 +16,20 @@
 
 [[constraint]]
   name = "github.com/oklog/oklog"
-  version = "0.3.0"
+  version = "0.3.2"
 
 [[constraint]]
   branch = "master"
   name = "golang.org/x/crypto"
 
 [[constraint]]
+  branch = "master"
+  name = "golang.org/x/net"
+
+[[constraint]]
   branch = "v2"
   name = "gopkg.in/urfave/cli.v2"
 
-[[constraint]]
-  branch = "master"
-  name = "golang.org/x/net"
+[prune]
+  go-tests = true
+  unused-packages = true

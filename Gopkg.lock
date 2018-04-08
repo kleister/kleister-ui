@@ -22,8 +22,8 @@
     "log",
     "log/level"
   ]
-  revision = "4dc7be5d2d12881735283bcab7352178e190fc71"
-  version = "v0.6.0"
+  revision = "ca4112baa34cb55091301bdc13b1420a122b1b9e"
+  version = "v0.7.0"
 
 [[projects]]
   name = "github.com/go-logfmt/logfmt"
@@ -78,7 +78,7 @@
     "webdav",
     "webdav/internal/xml"
   ]
-  revision = "b3c676e531a6dc479fa1b35ac961c13f5e2b4d2e"
+  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
 
 [[projects]]
   branch = "v2"
@@ -89,6 +89,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bd21e9a49351ab58af3ad4ef9ce32095aed5fea1965e1808ba14227ffc0e13e1"
+  inputs-digest = "e5b2b57b67429d099dd91c4ad93c51261da1da99bc68b628039bf4ca780af5e2"
   solver-name = "gps-cdcl"
   solver-version = 1
