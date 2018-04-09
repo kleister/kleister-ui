@@ -7,20 +7,24 @@
   version = "3.3.2"
 
 [[constraint]]
-  name = "github.com/go-kit/kit"
-  version = "0.7.0"
-
-[[constraint]]
   name = "github.com/joho/godotenv"
   version = "1.2.0"
 
 [[constraint]]
-  name = "github.com/oklog/oklog"
-  version = "0.3.2"
+  name = "github.com/oklog/run"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/prometheus/client_golang"
+  version = "0.8.0"
+
+[[constraint]]
+  name = "github.com/rs/zerolog"
+  version = "1.6.0"
 
 [[constraint]]
   branch = "master"
-  name = "golang.org/x/crypto"
+  name = "github.com/webhippie/fail"
 
 [[constraint]]
   branch = "master"
