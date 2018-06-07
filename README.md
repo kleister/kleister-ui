@@ -47,6 +47,7 @@ yarn watch
 
 ./kleister-ui --log-level debug server --static dist/static/
 ```
+
 The development server reloads the used assets on every request. So in order to properly work with it you need to start the API separately. After launching this command on a terminal you can access the web interface at [http://localhost:9000](http://localhost:9000).
 
 
