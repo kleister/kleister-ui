@@ -67,13 +67,6 @@ func Server(cfg *config.Config) *cli.Command {
 				EnvVars:     []string{"KLEISTER_UI_STATIC"},
 				Destination: &cfg.Server.Static,
 			},
-			&cli.StringFlag{
-				Name:        "storage-path",
-				Value:       "storage/",
-				Usage:       "folder for storing uploads",
-				EnvVars:     []string{"KLEISTER_UI_STORAGE"},
-				Destination: &cfg.Server.Storage,
-			},
 			&cli.BoolFlag{
 				Name:        "enable-pprof",
 				Value:       false,

@@ -9,7 +9,6 @@ type Server struct {
 	Key           string
 	Root          string
 	Static        string
-	Storage       string
 	StrictCurves  bool
 	StrictCiphers bool
 	Prometheus    bool

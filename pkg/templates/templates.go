@@ -7,10 +7,10 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/Masterminds/sprig"
 	"github.com/kleister/kleister-ui/pkg/assets"
 	"github.com/kleister/kleister-ui/pkg/config"
 	"github.com/rs/zerolog/log"
-	"github.com/Masterminds/sprig"
 )
 
 // Load loads the template to make it parseable.
