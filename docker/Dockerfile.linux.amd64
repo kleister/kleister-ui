@@ -7,5 +7,5 @@ CMD ["server"]
 
 ENV KLEISTER_UI_ASSETS /usr/share/kleister
 
-COPY dist/static /usr/share/kleister
-COPY dist/binaries/kleister-ui /usr/bin/kleister-ui
+COPY static /usr/share/kleister
+COPY bin/kleister-ui /usr/bin/kleister-ui
