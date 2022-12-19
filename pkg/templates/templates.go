@@ -2,12 +2,11 @@ package templates
 
 import (
 	"html/template"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/Masterminds/sprig"
+	"github.com/Masterminds/sprig/v3"
 	"github.com/kleister/kleister-ui/pkg/assets"
 	"github.com/kleister/kleister-ui/pkg/config"
 	"github.com/rs/zerolog/log"
@@ -76,7 +75,7 @@ func Load(cfg *config.Config) *template.Template {
 			})
 
 			for _, name := range files {
-				file, err := ioutil.ReadFile(name)
+				file, err := os.ReadFile(name)
 
 				if err != nil {
 					log.Warn().

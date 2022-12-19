@@ -15,19 +15,7 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
-[*.star]
-indent_style = space
-indent_size = 2
-
-[*.{html,tmpl}]
-indent_style = tab
-indent_size = 4
-
-[*.{js,vue}]
-indent_style = space
-indent_size = 2
-
-[*.{yml,toml,json}]
+[*.{ts,js,vue}]
 indent_style = space
 indent_size = 2
 
@@ -35,21 +23,9 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
-[*.php]
+[*.{yml,toml,json}]
 indent_style = space
 indent_size = 2
-
-[*.rb]
-indent_style = space
-indent_size = 2
-
-[*.py]
-indent_style = tab
-indent_size = 4
-
-[*.sh]
-indent_style = space
-indent_size = 4
 
 [*.md]
 trim_trailing_whitespace = true

@@ -1,86 +1,91 @@
 # Kleister: Web UI
 
-[![Build Status](https://cloud.drone.io/api/badges/kleister/kleister-ui/status.svg)](https://cloud.drone.io/kleister/kleister-ui)
-[![Join the Matrix chat at https://matrix.to/#/#kleister:matrix.org](https://img.shields.io/badge/matrix-%23kleister-7bc9a4.svg)](https://matrix.to/#/#kleister:matrix.org)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/74862ecc4341446185e40b15a9032f64)](https://www.codacy.com/app/kleister/kleister-scripts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kleister/kleister-scripts&amp;utm_campaign=Badge_Grade)
-[![Go Doc](https://godoc.org/github.com/kleister/kleister-ui?status.svg)](http://godoc.org/github.com/kleister/kleister-ui)
-[![Go Report](http://goreportcard.com/badge/github.com/kleister/kleister-ui)](http://goreportcard.com/report/github.com/kleister/kleister-ui)
-[![](https://images.microbadger.com/badges/image/kleister/kleister-ui.svg)](http://microbadger.com/images/kleister/kleister-ui "Get your own image badge on microbadger.com")
+[![General Workflow](https://github.com/kleister/kleister-ui/actions/workflows/general.yml/badge.svg)](https://github.com/kleister/kleister-ui/actions/workflows/general.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/df9689895d604266ab02a3e18a686b0a)](https://www.codacy.com/gh/kleister/kleister-ui/dashboard?utm_source=github.com&utm_medium=referral&utm_content=kleister/kleister-ui&utm_campaign=Badge_Grade) [![Join the Matrix chat at https://matrix.to/#/#kleister:matrix.org](https://img.shields.io/badge/matrix-%23kleister%3Amatrix.org-7bc9a4.svg)](https://matrix.to/#/#kleister:matrix.org) [![Go Reference](https://pkg.go.dev/badge/github.com/kleister/kleister-ui.svg)](https://pkg.go.dev/github.com/kleister/kleister-ui) [![Docker Size](https://img.shields.io/docker/image-size/kleister/kleister-ui/latest)](https://hub.docker.com/r/kleister/kleister-ui) [![Docker Pulls](https://img.shields.io/docker/pulls/kleister/kleister-ui)](https://hub.docker.com/r/kleister/kleister-ui) [![GitHub Repo](https://img.shields.io/badge/github-repo-yellowgreen)](https://github.com/kleister/kleister-ui)
 
-**This project is under heavy development, it's not in a working state yet!**
-
-Within this repository we are building the web interface for our [Kleister API](https://github.com/kleister/kleister-api) server, for further information take a look at our [documentation](https://kleister.tech).
-
-*Where does this name come from or what does it mean? It's quite simple, it's one german word for paste/glue, I thought it's a good match as it glues together the modpacks for Minecraft.*
-
+Within this repository we are building the web interface for our
+[Kleister API][api] server, for further information take a look at our
+[documentation][documentation].
 
 ## Install
 
-You can download prebuilt binaries from the GitHub releases or from our [download site](http://dl.kleister.tech/ui). You are a Mac user? Just take a look at our [homebrew formula](https://github.com/kleister/homebrew-kleister).
+You can download prebuilt binaries from the GitHub releases or from our
+[download site][downloads]. You are a Mac user? Just take a look at our
+[homebrew formula][homebrew].
 
-If you want to serve the UI by a regular webserver you can also find a tarball on our downloads server to just get the assets.
-
+If you want to serve the UI by a regular webserver you can also find a tarball
+on our downloads server to just get the assets.
 
 ## Build
 
-This project requires NodeJS and Yarn to build the sources, the installation of NodeJS or Yarn won't be covered by these instructions, please follow the official documentation for [NodeJS](https://nodejs.org/en/download/package-manager/) and [Yarn](https://yarnpkg.com/lang/en/docs/install/). To build the sources just execute the following command after the setup:
+This project requires NodeJS to build the sources, the installation of NodeJS
+won't be covered by these instructions, please follow the official documentation
+for [NodeJS][nodejs]. To build the sources just execute the following command
+after the setup.
 
-```
-yarn install
-yarn build
-```
+If you also want to publish it as a single binary with our server written in Go
+make sure you have a working Go environment, for further reference or a guide
+take a look at the [install instructions][golang]. This project requires
+Go >= v1.18, at least that's the version we are using.
 
-If you also want to publish it as a single binary with our server written in Go make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](http://golang.org/doc/install.html). This project requires Go >= v1.11.
-
-```bash
+```console
 git clone https://github.com/kleister/kleister-ui.git
 cd kleister-ui
 
-make generate build
+npm install --ci
+npm run build
 
+make generate build
 ./bin/kleister-ui -h
 ```
 
-With the `make generate` command we are embedding all the static assets into the binary so there is no need for any webserver or anything else beside launching this binary.
-
+We are embedding all the static assets into the binary so there is no need for
+any webserver or anything else beside launching this binary.
 
 ## Development
 
-To start developing on this UI you have to execute only a few commands. To setup a NodeJS environment or even a Go environment is out of the scope of this document. To start development just execute those commands:
+To start developing on this UI you have to execute only a few commands. To setup
+a NodeJS environment or even a Go environment is out of the scope of this
+document. To start development just execute those commands:
 
-```bash
-yarn install
-yarn watch
+```console
+npm install --ci
+npm run server
 
 make generate build
 ./bin/kleister-ui --log-level debug server --static dist/static/
 ```
 
-The development server reloads the used assets on every request. To properly work with it you need to start the [API server](https://github.com/kleister/kleister-api) separately since this project doesn't include it. After launching this command on a terminal you can access the web interface at [http://localhost:8080](http://localhost:8080).
-
+The development server reloads the used assets on every request. To properly
+work with it you need to start the [API server][api] separately since this
+project doesn't include it. After launching this command on a terminal you can
+access the web interface at [http://localhost:8080](http://localhost:8080).
 
 ## Security
 
-If you find a security issue please contact kleister@webhippie.de first.
-
+If you find a security issue please contact
+[kleister@webhippie.de](mailto:kleister@webhippie.de) first.
 
 ## Contributing
 
 Fork -> Patch -> Push -> Pull Request
 
-
 ## Authors
 
-* [Thomas Boerger](https://github.com/tboerger)
-
+-   [Thomas Boerger](https://github.com/tboerger)
 
 ## License
 
 Apache-2.0
 
-
 ## Copyright
 
-```
+```console
 Copyright (c) 2018 Thomas Boerger <thomas@webhippie.de>
 ```
+
+[api]: https://github.com/kleister/kleister-api
+[documentation]: https://kleister.eu
+[downloads]: http://dl.kleister.eu/ui
+[homebrew]: https://github.com/kleister/homebrew-kleister
+[nodejs]: https://nodejs.org/en/download/package-manager/
+[golang]: http://golang.org/doc/install.html
