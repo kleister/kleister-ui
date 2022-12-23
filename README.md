@@ -3,14 +3,15 @@
 [![General Workflow](https://github.com/kleister/kleister-ui/actions/workflows/general.yml/badge.svg)](https://github.com/kleister/kleister-ui/actions/workflows/general.yml) [![Join the Matrix chat at https://matrix.to/#/#kleister:matrix.org](https://img.shields.io/badge/matrix-%23kleister%3Amatrix.org-7bc9a4.svg)](https://matrix.to/#/#kleister:matrix.org) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/df9689895d604266ab02a3e18a686b0a)](https://www.codacy.com/gh/kleister/kleister-ui/dashboard?utm_source=github.com&utm_medium=referral&utm_content=kleister/kleister-ui&utm_campaign=Badge_Grade) [![Go Reference](https://pkg.go.dev/badge/github.com/kleister/kleister-ui.svg)](https://pkg.go.dev/github.com/kleister/kleister-ui) [![GitHub Repo](https://img.shields.io/badge/github-repo-yellowgreen)](https://github.com/kleister/kleister-ui)
 
 Within this repository we are building the web interface for our
-[Kleister API][api] server, for further information take a look at our
-[documentation][documentation].
+[Kleister API][api] server.
 
 ## Install
 
-You can download prebuilt binaries from the GitHub releases or from our
-[download site][downloads]. You are a Mac user? Just take a look at our
-[homebrew formula][homebrew].
+You can download prebuilt binaries from the [GitHub releases][releases] or from
+our [download site][downloads]. If you prefer to use containers you could use
+our images published on [Docker Hub][dockerhub] or [Quay][quay]. You are a Mac
+user? Just take a look at our [homebrew formula][homebrew]. If you need further
+guidance how to install this take a look at our [documentation][docs].
 
 If you want to serve the UI by a regular webserver you can also find a tarball
 on our downloads server to just get the assets.
@@ -84,8 +85,11 @@ Copyright (c) 2018 Thomas Boerger <thomas@webhippie.de>
 ```
 
 [api]: https://github.com/kleister/kleister-api
-[documentation]: https://kleister.eu
+[docs]: https://kleister.eu
+[releases]: https://github.com/kleister/kleister-ui/releases
 [downloads]: http://dl.kleister.eu/ui
+[dockerhub]: https://hub.docker.com/r/kleister/kleister-ui/tags/
+[quay]: https://quay.io/repository/kleister/kleister-ui?tab=tags
 [homebrew]: https://github.com/kleister/homebrew-kleister
 [nodejs]: https://nodejs.org/en/download/package-manager/
 [golang]: http://golang.org/doc/install.html
