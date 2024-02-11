@@ -1,0 +1,9 @@
+export { default as CancelAction } from "./CancelAction.vue";
+export { default as ContentHeader } from "./ContentHeader.vue";
+export { default as CreateAction } from "./CreateAction.vue";
+export { default as DeleteAction } from "./DeleteAction.vue";
+export { default as GeneralFooter } from "./GeneralFooter.vue";
+export { default as GeneralHeader } from "./GeneralHeader.vue";
+export { default as GeneralLayout } from "./GeneralLayout.vue";
+export { default as ShowAction } from "./ShowAction.vue";
+export { default as UpdateAction } from "./UpdateAction.vue";

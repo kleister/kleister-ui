@@ -1,4 +1,6 @@
 .direnv/
+.devenv/
+
 .bingo/
 .github/
 

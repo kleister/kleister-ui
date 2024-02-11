@@ -3,7 +3,7 @@ import * as path from "path";
 
 import archiver from "archiver";
 
-export default function archive(options = {}) {
+export default function archive() {
   return {
     name: "archive",
     async writeBundle({ dir }, bundle) {

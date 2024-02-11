@@ -1,9 +1,16 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <HelloWorld msg="Kleister" />
+  <GeneralLayout />
 </template>
+
+<script setup>
+import { onMounted } from "vue";
+import { initFlowbite } from "flowbite";
+
+import GeneralLayout from "./components/GeneralLayout.vue";
+
+onMounted(() => {
+  initFlowbite();
+});
+</script>
 
 <style scoped></style>

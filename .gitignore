@@ -1,11 +1,13 @@
 .direnv/
+.devenv/
 
+.pre-commit-config.yaml
 coverage.out
 pkg/assets/static.go
 
+/static
 /bin
 /dist
-/static
 
 /node_modules
 npm-debug.log*
