@@ -41,15 +41,17 @@
         devenv = {
           shells = {
             default = {
+              name = "kleister-ui";
+
               pre-commit = {
                 hooks = {
                   nixpkgs-fmt = {
                     enable = true;
                   };
-                  eslint = {
+                  golangci-lint = {
                     enable = true;
                   };
-                  golangci-lint = {
+                  eslint = {
                     enable = true;
                   };
                 };
@@ -58,21 +60,24 @@
               languages = {
                 go = {
                   enable = true;
+                  package = pkgs.go_1_21;
                 };
                 javascript = {
                   enable = true;
+                  package = pkgs.nodejs_20;
                 };
               };
 
               packages = with pkgs; [
-                nodePackages.aws-cdk
-
+                bingo
                 gnumake
                 golangci-lint
                 nixpkgs-fmt
               ];
 
-              env = { };
+              env = {
+                CGO_ENABLED = "0";
+              };
             };
           };
         };

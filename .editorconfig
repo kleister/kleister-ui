@@ -6,6 +6,8 @@ root = true
 charset = utf-8
 insert_final_newline = true
 trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
 
 [Makefile]
 indent_style = tab
@@ -14,10 +16,6 @@ indent_size = 4
 [*.{html,tmpl,py,go}]
 indent_style = tab
 indent_size = 4
-
-[*.{yml,yaml,toml,json,css,less,js,vue,rb,nix}]
-indent_style = space
-indent_size = 2
 
 [*.sh]
 indent_style = space

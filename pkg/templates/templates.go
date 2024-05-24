@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/Masterminds/sprig/v3"
+	"github.com/drone/funcmap"
 	"github.com/kleister/kleister-ui/pkg/assets"
 	"github.com/kleister/kleister-ui/pkg/config"
 	"github.com/rs/zerolog/log"
@@ -53,11 +53,15 @@ func Load(cfg *config.Config) *template.Template {
 		}
 	}
 
-	if cfg.Server.Static != "" {
-		if stat, err := os.Stat(cfg.Server.Static); err == nil && stat.IsDir() {
+	if cfg.Server.Assets != "" {
+		if stat, err := os.Stat(cfg.Server.Assets); err == nil && stat.IsDir() {
 			files := []string{}
 
-			filepath.Walk(cfg.Server.Static, func(path string, f os.FileInfo, err error) error {
+			_ = filepath.Walk(cfg.Server.Assets, func(path string, f os.FileInfo, err error) error {
+				if err != nil {
+					return err
+				}
+
 				if f.IsDir() {
 					return nil
 				}
@@ -87,7 +91,7 @@ func Load(cfg *config.Config) *template.Template {
 				tplName := strings.TrimPrefix(
 					strings.TrimPrefix(
 						name,
-						cfg.Server.Static,
+						cfg.Server.Assets,
 					),
 					"/",
 				)
@@ -110,5 +114,5 @@ func Load(cfg *config.Config) *template.Template {
 
 // Funcs provides some general usefule template helpers.
 func Funcs() template.FuncMap {
-	return sprig.FuncMap()
+	return funcmap.Funcs
 }

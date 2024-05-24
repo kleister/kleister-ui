@@ -10,7 +10,6 @@ const getAssetPathsMapper = (ctx, srcDir) => {
       srcFile = path.resolve(srcDir, srcFile);
     }
 
-    // eslint-disable-next-line no-undef
     if (process.platform === "win32") {
       srcFile = srcFile.replace(/\\+/g, "/");
     }
@@ -36,9 +35,9 @@ export default function copy(options = {}) {
   return {
     name: "copy",
     async generateBundle() {
-      const { assets, notEmitFiles } = options;
+      const assets = [["public/favicon.ico", "favicon.ico"]];
+      const notEmitFiles = false;
 
-      // eslint-disable-next-line no-undef
       const srcDir = process.cwd();
 
       let { outputDirectory: outDir } = options;
