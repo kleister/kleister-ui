@@ -1,11 +1,14 @@
 FROM arm64v8/alpine:3.20
-RUN apk add --no-cache ca-certificates mailcap
+
+RUN apk add --no-cache ca-certificates mailcap && \
+    addgroup -g 1337 kleister && \
+    adduser -D -u 1337 -h /var/lib/kleister -G kleister kleister
 
 EXPOSE 8000 8080
 ENTRYPOINT ["/usr/bin/kleister-ui"]
 CMD ["server"]
 
-ENV KLEISTER_UI_ASSETS /usr/share/kleister
-
-COPY static /usr/share/kleister
+COPY --chown=1337:1337 static /usr/share/kleister
 COPY bin/kleister-ui /usr/bin/kleister-ui
+WORKDIR /var/lib/kleister
+USER kleister

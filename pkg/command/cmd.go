@@ -10,7 +10,7 @@ import (
 var (
 	rootCmd = &cobra.Command{
 		Use:           "kleister-ui",
-		Short:         "Manage mod packs for minecraft",
+		Short:         "Etherpad for markdown with go",
 		Version:       version.String,
 		SilenceErrors: false,
 		SilenceUsage:  true,

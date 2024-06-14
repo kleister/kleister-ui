@@ -92,7 +92,7 @@ func serverAction(_ *cobra.Command, _ []string) {
 	}
 
 	registry := metrics.New(
-		metrics.WithNamespace("gopad_ui"),
+		metrics.WithNamespace("kleister_ui"),
 		metrics.WithToken(token),
 	)
 
