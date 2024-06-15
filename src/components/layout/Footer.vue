@@ -2,8 +2,8 @@
   <fwb-footer>
     <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
       Copyright &copy; 2024
-      <a class="hover:underline" href="https://kleister.eu/">Kleister</a>. All rights
-      reserved.
+      <a class="hover:underline" href="https://kleister.eu/">Kleister</a>. All
+      rights reserved.
     </span>
 
     <fwb-footer-link-group>
