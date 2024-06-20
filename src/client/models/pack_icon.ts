@@ -6,14 +6,13 @@
  * Model to represent pack icon
  */
 export type pack_icon = {
-    readonly id?: string;
-    slug?: string;
-    content_type?: string;
-    md5?: string;
-    path?: string;
-    url?: string;
-    upload?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  slug?: string;
+  content_type?: string;
+  md5?: string;
+  path?: string;
+  url?: string;
+  upload?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

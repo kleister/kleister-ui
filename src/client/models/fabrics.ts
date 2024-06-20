@@ -2,12 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { fabric } from './fabric';
+import type { fabric } from "./fabric";
 /**
  * Model to represent list of fabrics
  */
 export type fabrics = {
-    total?: number;
-    versions?: Array<fabric>;
+  total?: number;
+  versions?: Array<fabric>;
 };
-

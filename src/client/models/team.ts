@@ -6,10 +6,9 @@
  * Model to represent team
  */
 export type team = {
-    readonly id?: string;
-    slug?: string;
-    name?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  slug?: string;
+  name?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

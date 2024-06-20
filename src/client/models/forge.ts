@@ -6,10 +6,9 @@
  * Model to represent forge
  */
 export type forge = {
-    readonly id?: string;
-    name?: string;
-    minecraft?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  name?: string;
+  minecraft?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

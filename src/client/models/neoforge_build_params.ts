@@ -6,7 +6,6 @@
  * Model to represent params for neoforge builds
  */
 export type neoforge_build_params = {
-    pack: string;
-    build: string;
+  pack: string;
+  build: string;
 };
-

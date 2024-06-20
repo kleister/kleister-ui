@@ -6,9 +6,8 @@
  * Model to represent neoforge
  */
 export type neoforge = {
-    readonly id?: string;
-    name?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  name?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

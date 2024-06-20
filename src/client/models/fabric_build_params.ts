@@ -6,7 +6,6 @@
  * Model to represent params for fabric builds
  */
 export type fabric_build_params = {
-    pack: string;
-    build: string;
+  pack: string;
+  build: string;
 };
-

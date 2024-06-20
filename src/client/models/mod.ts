@@ -6,16 +6,15 @@
  * Model to represent mod
  */
 export type mod = {
-    readonly id?: string;
-    slug?: string;
-    name?: string;
-    side?: string;
-    description?: string;
-    author?: string;
-    website?: string;
-    donate?: string;
-    public?: boolean;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  slug?: string;
+  name?: string;
+  side?: string;
+  description?: string;
+  author?: string;
+  website?: string;
+  donate?: string;
+  public?: boolean;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

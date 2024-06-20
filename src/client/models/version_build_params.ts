@@ -6,7 +6,6 @@
  * Parameters to attach or unlink version build
  */
 export type version_build_params = {
-    pack: string;
-    build: string;
+  pack: string;
+  build: string;
 };
-

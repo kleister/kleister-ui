@@ -6,7 +6,6 @@
  * Model to represent params for minecraft builds
  */
 export type minecraft_build_params = {
-    pack: string;
-    build: string;
+  pack: string;
+  build: string;
 };
-

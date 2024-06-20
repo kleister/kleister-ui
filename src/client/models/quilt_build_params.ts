@@ -6,7 +6,6 @@
  * Model to represent params for quilt builds
  */
 export type quilt_build_params = {
-    pack: string;
-    build: string;
+  pack: string;
+  build: string;
 };
-

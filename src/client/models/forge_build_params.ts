@@ -6,7 +6,6 @@
  * Model to represent params for forge builds
  */
 export type forge_build_params = {
-    pack: string;
-    build: string;
+  pack: string;
+  build: string;
 };
-

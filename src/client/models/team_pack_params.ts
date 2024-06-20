@@ -6,14 +6,13 @@
  * Parameters to attach or unlink team pack
  */
 export type team_pack_params = {
-    pack: string;
-    perm?: team_pack_params.perm;
+  pack: string;
+  perm?: team_pack_params.perm;
 };
 export namespace team_pack_params {
-    export enum perm {
-        TEAM = 'team',
-        ADMIN = 'admin',
-        OWNER = 'owner',
-    }
+  export enum perm {
+    TEAM = "team",
+    ADMIN = "admin",
+    OWNER = "owner",
+  }
 }
-

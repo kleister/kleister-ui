@@ -6,14 +6,13 @@
  * Parameters to attach or unlink mod team
  */
 export type mod_team_params = {
-    team: string;
-    perm?: mod_team_params.perm;
+  team: string;
+  perm?: mod_team_params.perm;
 };
 export namespace mod_team_params {
-    export enum perm {
-        TEAM = 'team',
-        ADMIN = 'admin',
-        OWNER = 'owner',
-    }
+  export enum perm {
+    TEAM = "team",
+    ADMIN = "admin",
+    OWNER = "owner",
+  }
 }
-

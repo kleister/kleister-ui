@@ -6,10 +6,9 @@
  * Model to represent minecraft
  */
 export type minecraft = {
-    readonly id?: string;
-    name?: string;
-    type?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  name?: string;
+  type?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

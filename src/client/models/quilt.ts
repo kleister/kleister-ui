@@ -6,9 +6,8 @@
  * Model to represent quilt
  */
 export type quilt = {
-    readonly id?: string;
-    name?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  name?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-

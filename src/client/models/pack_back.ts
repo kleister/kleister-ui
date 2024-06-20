@@ -6,14 +6,13 @@
  * Model to represent pack background
  */
 export type pack_back = {
-    readonly id?: string;
-    slug?: string;
-    content_type?: string;
-    md5?: string;
-    path?: string;
-    url?: string;
-    upload?: string;
-    readonly created_at?: string;
-    readonly updated_at?: string;
+  readonly id?: string;
+  slug?: string;
+  content_type?: string;
+  md5?: string;
+  path?: string;
+  url?: string;
+  upload?: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 };
-
