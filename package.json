@@ -30,7 +30,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@vitejs/plugin-vue": "^5.0.4",
-    "axios": "^1.6.7",
+    "axios": "^1.7.4",
     "flowbite": "^2.3.0",
     "flowbite-vue": "^0.1.2",
     "pinia": "^2.1.7",
