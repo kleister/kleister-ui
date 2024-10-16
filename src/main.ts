@@ -21,7 +21,7 @@ import router from "./router";
 import App from "./App.vue";
 
 import { useConfigStore } from "./store/config";
-import { useErrorStore } from "./store/error";
+import { useNotifyStore } from "./store/notify";
 import { useAuthStore } from "./store/auth";
 
 library.add(fab, far, fas);
@@ -93,7 +93,7 @@ app.component("FontAwesomeIcon", FontAwesomeIcon);
 useConfigStore()
   .loadConfig()
   .then(() => {
-    useErrorStore().initialize();
+    useNotifyStore().initialize();
     useAuthStore().initialize();
     app.mount("#app");
   });

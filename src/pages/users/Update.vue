@@ -42,8 +42,7 @@
   <form class="space-y-4 md:space-y-6" @submit.prevent="submit">
     <fwb-input
       v-model="values.username"
-      placeholder="Username"
-      label="Username"
+      :label="t('users.username')"
       :validation-status="v.username.$error ? 'error' : undefined"
     >
       <template v-if="v.username.$error" #validationMessage>
@@ -53,8 +52,7 @@
 
     <fwb-input
       v-model="values.password"
-      placeholder="Password"
-      label="Password"
+      :label="t('users.password')"
       type="password"
       :validation-status="v.password.$error ? 'error' : undefined"
     >
@@ -65,8 +63,7 @@
 
     <fwb-input
       v-model="values.email"
-      placeholder="Email"
-      label="Email"
+      :label="t('users.email')"
       :validation-status="v.email.$error ? 'error' : undefined"
     >
       <template v-if="v.email.$error" #validationMessage>
@@ -76,8 +73,7 @@
 
     <fwb-input
       v-model="values.fullname"
-      placeholder="Fullname"
-      label="Fullname"
+      :label="t('users.fullname')"
       :validation-status="v.fullname.$error ? 'error' : undefined"
     >
       <template v-if="v.fullname.$error" #validationMessage>
@@ -86,15 +82,15 @@
     </fwb-input>
 
     <div>
-      <fwb-toggle v-model="values.admin" label="Check if user is admin" />
+      <fwb-toggle v-model="values.admin" :label="t('users.is_admin')" />
     </div>
 
     <div>
-      <fwb-toggle v-model="values.active" label="Check if user is active" />
+      <fwb-toggle v-model="values.active" :label="t('users.is_active')" />
     </div>
 
     <fwb-button color="default" size="lg" :loading="userStore.loading">
-      Submit
+      {{ t("actions.update") }}
     </fwb-button>
   </form>
 </template>
@@ -117,7 +113,7 @@ import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "../../store/users";
-import { useErrorStore } from "../../store/error";
+import { useNotifyStore } from "../../store/notify";
 
 import type { user, notification } from "../../client/types.gen";
 
@@ -126,7 +122,7 @@ const { t } = useI18n({
 });
 
 const userStore = useUserStore();
-const errorStore = useErrorStore();
+const notifyStore = useNotifyStore();
 const { currentUser } = storeToRefs(userStore);
 
 const route = useRoute();
@@ -178,9 +174,9 @@ async function submit() {
 
         const result = <user>response;
 
-        errorStore.addError({
+        notifyStore.addAlert({
           kind: "success",
-          message: "Successfully updated",
+          message: t("users.update.success"),
         });
 
         router.push(

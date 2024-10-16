@@ -1,5 +1,5 @@
 <template>
-  <global-errors />
+  <global-alerts />
   <layout-header v-if="authStore.isAuthed" />
   <div
     v-if="authStore.isAuthed"
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutHeader, LayoutFooter, GlobalErrors } from "./components";
+import { LayoutHeader, LayoutFooter, GlobalAlerts } from "./components";
 
 import { useAuthStore } from "./store/auth";
 const authStore = useAuthStore();

@@ -10,4 +10,4 @@ export { default as UpdateAction } from "./action/Update.vue";
 
 export { default as ContentHeader } from "./content/Header.vue";
 
-export { default as GlobalErrors } from "./global/Errors.vue";
+export { default as GlobalAlerts } from "./global/Alerts.vue";

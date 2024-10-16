@@ -138,7 +138,7 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "../../store/users";
-import { useErrorStore } from "../../store/error";
+import { useNotifyStore } from "../../store/notify";
 
 import type { notification } from "../../client/types.gen";
 
@@ -147,7 +147,7 @@ const { t } = useI18n({
 });
 
 const userStore = useUserStore();
-const errorStore = useErrorStore();
+const notifyStore = useNotifyStore();
 const { getUsers } = storeToRefs(userStore);
 
 function refreshUsers() {
@@ -163,7 +163,7 @@ function deleteRecord(username: string) {
           throw response;
         }
 
-        errorStore.addError({
+        notifyStore.addAlert({
           kind: "success",
           message: <string>response.message,
         });

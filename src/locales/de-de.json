@@ -42,8 +42,12 @@
     "name": "Name",
     "no_entries": "Keine Gruppen gefunden",
     "create": {
+      "success": "Erfolgreich angelegt",
       "question": "Vielleicht möchtest du eine {0}?",
       "link": "Gruppe anlegen"
+    },
+    "update": {
+      "success": "Erfolgreich geändert"
     }
   },
   "users": {
@@ -54,15 +58,22 @@
       "update": "Benutzer: {0}"
     },
     "username": "Benutzer",
+    "password": "Passwort",
     "email": "Email",
     "fullname": "Name",
     "admin": "Admin",
     "active": "Aktiv",
     "no_entries": "Keine Benutzer gefunden",
     "create": {
+      "success": "Erfolgreich angelegt",
       "question": "Vielleicht möchtest du einen {0}?",
       "link": "Benutzer anlegen"
-    }
+    },
+    "update": {
+      "success": "Erfolgreich geändert"
+    },
+    "is_admin": "Benutzer ist Admin",
+    "is_active": "Benutzer ist aktiv"
   },
   "checkbox": {
     "enabled": "Aktiviert",

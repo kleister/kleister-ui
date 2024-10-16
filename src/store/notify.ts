@@ -11,23 +11,23 @@ interface notification {
   message: string;
 }
 
-interface ErrorState {
-  errors: notification[];
+interface NotifyState {
+  alerts: notification[];
 }
 
-export const useErrorStore = defineStore("error", {
-  state: (): ErrorState => ({
-    errors: [],
+export const useNotifyStore = defineStore("notify", {
+  state: (): NotifyState => ({
+    alerts: [],
   }),
   actions: {
-    addError(error: notification): void {
-      this.errors.push(error);
+    addAlert(error: notification): void {
+      this.alerts.push(error);
     },
-    removeError(index: number): void {
-      this.errors.splice(index, 1);
+    dropAlert(index: number): void {
+      this.alerts.splice(index, 1);
     },
     clearErrors() {
-      this.errors = [];
+      this.alerts = [];
     },
     initialize(): void {
       client.instance.interceptors.response.use(
@@ -54,18 +54,18 @@ export const useErrorStore = defineStore("error", {
                 message = data.message || "Unexpected error";
             }
 
-            this.addError({
+            this.addAlert({
               kind: "danger",
               status: error.response.status,
               message,
             });
           } else if (error.request) {
-            this.addError({
+            this.addAlert({
               kind: "danger",
               message: "No response",
             });
           } else {
-            this.addError({
+            this.addAlert({
               kind: "danger",
               message: error.message,
             });

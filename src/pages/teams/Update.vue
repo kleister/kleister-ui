@@ -39,8 +39,7 @@
   <form class="space-y-4 md:space-y-6" @submit.prevent="submit">
     <fwb-input
       v-model="values.slug"
-      placeholder="Slug"
-      label="Slug"
+      :label="t('common.slug')"
       :validation-status="v.slug.$error ? 'error' : undefined"
     >
       <template v-if="v.slug.$error" #validationMessage>
@@ -50,8 +49,7 @@
 
     <fwb-input
       v-model="values.name"
-      placeholder="Name"
-      label="Name"
+      :label="t('teams.name')"
       :validation-status="v.name.$error ? 'error' : undefined"
     >
       <template v-if="v.name.$error" #validationMessage>
@@ -60,7 +58,7 @@
     </fwb-input>
 
     <fwb-button color="default" size="lg" :loading="teamStore.loading">
-      Submit
+      {{ t("actions.update") }}
     </fwb-button>
   </form>
 </template>
@@ -82,7 +80,7 @@ import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useTeamStore } from "../../store/teams";
-import { useErrorStore } from "../../store/error";
+import { useNotifyStore } from "../../store/notify";
 
 import type { team, notification } from "../../client/types.gen";
 
@@ -91,7 +89,7 @@ const { t } = useI18n({
 });
 
 const teamStore = useTeamStore();
-const errorStore = useErrorStore();
+const notifyStore = useNotifyStore();
 const { currentTeam } = storeToRefs(teamStore);
 
 const route = useRoute();
@@ -131,9 +129,9 @@ async function submit() {
 
         const result = <team>response;
 
-        errorStore.addError({
+        notifyStore.addAlert({
           kind: "success",
-          message: "Successfully updated",
+          message: t("teams.update.success"),
         });
 
         router.push(

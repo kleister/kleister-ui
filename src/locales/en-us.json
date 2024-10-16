@@ -42,8 +42,12 @@
     "name": "Name",
     "no_entries": "No teams found",
     "create": {
+      "success": "Successfully created",
       "question": "Maybe you want to {0}?",
       "link": "create a team"
+    },
+    "update": {
+      "success": "Successfully updated"
     }
   },
   "users": {
@@ -54,15 +58,22 @@
       "update": "User: {0}"
     },
     "username": "Username",
+    "password": "Password",
     "email": "Email",
     "fullname": "Fullname",
     "admin": "Admin",
     "active": "Active",
     "no_entries": "No users found",
     "create": {
+      "success": "Successfully created",
       "question": "Maybe you want to {0}?",
       "link": "create a user"
-    }
+    },
+    "update": {
+      "success": "Successdully updated"
+    },
+    "is_admin": "User is admin",
+    "is_active": "User is active"
   },
   "checkbox": {
     "enabled": "Enabled",

@@ -52,12 +52,10 @@ import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "../../store/auth";
-import { useErrorStore } from "../../store/error";
 
 import type { auth_token, notification } from "../../client/types.gen";
 
 const authStore = useAuthStore();
-const errorStore = useErrorStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -84,11 +82,6 @@ async function submit() {
         if ("status" in response && response.status !== 200) {
           throw response;
         }
-
-        errorStore.addError({
-          kind: "success",
-          message: "Successfully authenticated",
-        });
 
         router.push((route.query.redirect as string) || "/");
       })

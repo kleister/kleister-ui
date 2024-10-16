@@ -108,7 +108,7 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useTeamStore } from "../../store/teams";
-import { useErrorStore } from "../../store/error";
+import { useNotifyStore } from "../../store/notify";
 
 import type { notification } from "../../client/types.gen";
 
@@ -117,7 +117,7 @@ const { t } = useI18n({
 });
 
 const teamStore = useTeamStore();
-const errorStore = useErrorStore();
+const notifyStore = useNotifyStore();
 const { getTeams } = storeToRefs(teamStore);
 
 function refreshTeams() {
@@ -133,7 +133,7 @@ function deleteRecord(slug: string) {
           throw response;
         }
 
-        errorStore.addError({
+        notifyStore.addAlert({
           kind: "success",
           message: <string>response.message,
         });
