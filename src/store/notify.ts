@@ -6,6 +6,7 @@ import { client } from "../client/services.gen";
 type AlertType = "info" | "danger" | "success" | "warning" | "dark";
 
 interface notification {
+  id?: number;
   kind?: AlertType;
   status?: number;
   message: string;
@@ -21,12 +22,23 @@ export const useNotifyStore = defineStore("notify", {
   }),
   actions: {
     addAlert(error: notification): void {
-      this.alerts.push(error);
+      const id = Date.now();
+      this.alerts.push({ ...error, id });
+
+      let timeout = 3000;
+
+      if (error.kind && error.kind === 'danger') {
+        timeout = 5000;
+      }
+
+      setTimeout(() => {
+        this.dropAlert(id);
+      }, timeout);
     },
-    dropAlert(index: number): void {
-      this.alerts.splice(index, 1);
+    dropAlert(id: number): void {
+      this.alerts = this.alerts.filter(alert => alert.id !== id);
     },
-    clearErrors() {
+    clearAlerts() {
       this.alerts = [];
     },
     initialize(): void {
