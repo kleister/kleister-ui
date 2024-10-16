@@ -1,5 +1,5 @@
 <template>
-  <fwb-breadcrumb solid class="m-5">
+  <fwb-breadcrumb v-if="record" solid>
     <router-link v-slot="{ href }" :to="{ name: 'welcome' }" custom>
       <fwb-breadcrumb-item :href="href" home>{{
         t("breadcrumb.home")
@@ -30,85 +30,131 @@
     </router-link>
   </fwb-breadcrumb>
 
-  <ContentHeader :title="t('teams.title.update', [record.name])">
-    <CancelAction :to="{ name: 'teams' }" />
-  </ContentHeader>
+  <content-header v-if="record" :title="t('teams.title.update', [record.name])">
+    <cancel-action
+      :to="(route.query.redirect as string) || { name: 'teams' }"
+    />
+  </content-header>
 
-  <div class="m-5">
-    <FormKit
-      id="update"
-      type="form"
-      submit-label="Update"
-      name="updateTeam"
-      @submit="submit"
+  <form class="space-y-4 md:space-y-6" @submit.prevent="submit">
+    <fwb-input
+      v-model="values.slug"
+      placeholder="Slug"
+      label="Slug"
+      :validation-status="v.slug.$error ? 'error' : undefined"
     >
-      <FormKit
-        id="slug"
-        type="text"
-        name="slug"
-        validation="required|length:3,64"
-        label="Slug"
-        help="Slug of your team"
-      />
-      <FormKit
-        id="name"
-        type="text"
-        name="name"
-        validation="required|length:3,64"
-        label="Name"
-        help="Name of your team"
-      />
-    </FormKit>
-  </div>
+      <template v-if="v.slug.$error" #validationMessage>
+        {{ v.slug.$errors[0].$message }}
+      </template>
+    </fwb-input>
+
+    <fwb-input
+      v-model="values.name"
+      placeholder="Name"
+      label="Name"
+      :validation-status="v.name.$error ? 'error' : undefined"
+    >
+      <template v-if="v.name.$error" #validationMessage>
+        {{ v.name.$errors[0].$message }}
+      </template>
+    </fwb-input>
+
+    <fwb-button color="default" size="lg" :loading="teamStore.loading">
+      Submit
+    </fwb-button>
+  </form>
 </template>
 
 <script setup lang="ts">
-import { FwbBreadcrumb, FwbBreadcrumbItem } from "flowbite-vue";
+import {
+  FwbBreadcrumb,
+  FwbBreadcrumbItem,
+  FwbInput,
+  FwbButton,
+} from "flowbite-vue";
 
 import { ContentHeader, CancelAction } from "../../components";
 
-import { onMounted, watch, computed } from "vue";
+import { reactive, onMounted, watch } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, maxLength } from "@vuelidate/validators";
 import { useRoute, useRouter } from "vue-router";
-import { reset } from "@formkit/core";
-import { useTeamStore } from "../../store/teams";
-
+import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
+import { useTeamStore } from "../../store/teams";
+import { useErrorStore } from "../../store/error";
 
-import type { notification } from "../../client/models/notification";
-import type { team } from "../../client/models/team";
-
-const store = useTeamStore();
-const route = useRoute();
-const router = useRouter();
+import type { team, notification } from "../../client/types.gen";
 
 const { t } = useI18n({
   useScope: "global",
 });
 
-const record = computed(() => {
-  return store.currentTeam;
+const teamStore = useTeamStore();
+const errorStore = useErrorStore();
+const { currentTeam } = storeToRefs(teamStore);
+
+const route = useRoute();
+const router = useRouter();
+
+const record = currentTeam as team;
+
+const values = reactive({
+  slug: "" as string,
+  name: "" as string,
 });
 
-function submit(data: team) {
-  return store
-    .updateTeam(<string>record.value.slug, data)
-    .then((resp: void | notification | team) => {
-      const val = <team>resp;
-      reset("update", val);
-      router.push({ name: "showTeam", params: { teamId: val.slug } });
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+const rules = {
+  slug: {
+    minLength: minLength(3),
+    maxLength: maxLength(255),
+  },
+  name: {
+    required,
+    minLength: minLength(3),
+    maxLength: maxLength(255),
+  },
+};
+
+const v = useVuelidate(rules, values);
+
+async function submit() {
+  const isValid = await v.value.$validate();
+
+  if (isValid) {
+    teamStore
+      .updateTeam(route.params.teamId.toString(), values)
+      .then((response: team | notification) => {
+        if ("status" in response && response.status !== 200) {
+          throw response;
+        }
+
+        const result = <team>response;
+
+        errorStore.addError({
+          kind: "success",
+          message: "Successfully updated",
+        });
+
+        router.push(
+          (route.query.redirect as string) || {
+            name: "showTeam",
+            params: { teamId: result.slug },
+          },
+        );
+      })
+      .catch(() => {});
+  }
 }
 
 onMounted(async () => {
   await router.isReady();
-  store.fetchTeam(<string>route.params.teamId);
+  teamStore.fetchTeam(<string>route.params.teamId);
 });
 
 watch(record, (newTeam) => {
-  reset("update", newTeam);
+  values.slug = <string>newTeam.slug;
+  values.name = <string>newTeam.name;
 });
 </script>
 

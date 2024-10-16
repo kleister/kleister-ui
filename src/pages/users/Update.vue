@@ -1,5 +1,5 @@
 <template>
-  <fwb-breadcrumb solid class="m-5">
+  <fwb-breadcrumb v-if="record" solid>
     <router-link v-slot="{ href }" :to="{ name: 'welcome' }" custom>
       <fwb-breadcrumb-item :href="href" home>{{
         t("breadcrumb.home")
@@ -30,117 +30,181 @@
     </router-link>
   </fwb-breadcrumb>
 
-  <ContentHeader :title="t('users.title.update', [record.username])">
-    <CancelAction :to="{ name: 'users' }" />
-  </ContentHeader>
+  <content-header
+    v-if="record"
+    :title="t('users.title.update', [record.username])"
+  >
+    <cancel-action
+      :to="(route.query.redirect as string) || { name: 'users' }"
+    />
+  </content-header>
 
-  <div class="m-5">
-    <FormKit
-      id="update"
-      type="form"
-      submit-label="Update"
-      name="updateUser"
-      @submit="submit"
+  <form class="space-y-4 md:space-y-6" @submit.prevent="submit">
+    <fwb-input
+      v-model="values.username"
+      placeholder="Username"
+      label="Username"
+      :validation-status="v.username.$error ? 'error' : undefined"
     >
-      <FormKit
-        id="username"
-        type="text"
-        name="username"
-        validation="required|length:3,64"
-        label="Username"
-        help="Username of your user"
-      />
-      <FormKit
-        id="password"
-        type="text"
-        name="password"
-        validation=""
-        label="Password"
-        help="Password of your user"
-      />
-      <FormKit
-        id="email"
-        type="text"
-        name="email"
-        validation="required|email"
-        label="Email"
-        help="Email of your user"
-      />
-      <FormKit
-        id="fullname"
-        type="text"
-        name="fullname"
-        validation=""
-        label="Fullname"
-        help="Fullname of your user"
-      />
-      <FormKit
-        id="admin"
-        type="checkbox"
-        name="admin"
-        validation=""
-        label="Admin"
-        help="Check if user is admin"
-      />
-      <FormKit
-        id="active"
-        type="checkbox"
-        name="active"
-        validation=""
-        label="Active"
-        help="Check if user is active"
-      />
-    </FormKit>
-  </div>
+      <template v-if="v.username.$error" #validationMessage>
+        {{ v.username.$errors[0].$message }}
+      </template>
+    </fwb-input>
+
+    <fwb-input
+      v-model="values.password"
+      placeholder="Password"
+      label="Password"
+      type="password"
+      :validation-status="v.password.$error ? 'error' : undefined"
+    >
+      <template v-if="v.password.$error" #validationMessage>
+        {{ v.password.$errors[0].$message }}
+      </template>
+    </fwb-input>
+
+    <fwb-input
+      v-model="values.email"
+      placeholder="Email"
+      label="Email"
+      :validation-status="v.email.$error ? 'error' : undefined"
+    >
+      <template v-if="v.email.$error" #validationMessage>
+        {{ v.email.$errors[0].$message }}
+      </template>
+    </fwb-input>
+
+    <fwb-input
+      v-model="values.fullname"
+      placeholder="Fullname"
+      label="Fullname"
+      :validation-status="v.fullname.$error ? 'error' : undefined"
+    >
+      <template v-if="v.fullname.$error" #validationMessage>
+        {{ v.fullname.$errors[0].$message }}
+      </template>
+    </fwb-input>
+
+    <div>
+      <fwb-toggle v-model="values.admin" label="Check if user is admin" />
+    </div>
+
+    <div>
+      <fwb-toggle v-model="values.active" label="Check if user is active" />
+    </div>
+
+    <fwb-button color="default" size="lg" :loading="userStore.loading">
+      Submit
+    </fwb-button>
+  </form>
 </template>
 
 <script setup lang="ts">
-import { FwbBreadcrumb, FwbBreadcrumbItem } from "flowbite-vue";
+import {
+  FwbBreadcrumb,
+  FwbBreadcrumbItem,
+  FwbInput,
+  FwbButton,
+  FwbToggle,
+} from "flowbite-vue";
 
 import { ContentHeader, CancelAction } from "../../components";
 
-import { onMounted, watch, computed } from "vue";
+import { reactive, onMounted, watch } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, maxLength, email } from "@vuelidate/validators";
 import { useRoute, useRouter } from "vue-router";
-import { reset } from "@formkit/core";
-import { useUserStore } from "../../store/users";
-
+import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
+import { useUserStore } from "../../store/users";
+import { useErrorStore } from "../../store/error";
 
-import type { notification } from "../../client/models/notification";
-import type { user } from "../../client/models/user";
-
-const store = useUserStore();
-const route = useRoute();
-const router = useRouter();
+import type { user, notification } from "../../client/types.gen";
 
 const { t } = useI18n({
   useScope: "global",
 });
 
-const record = computed(() => {
-  return store.currentUser;
+const userStore = useUserStore();
+const errorStore = useErrorStore();
+const { currentUser } = storeToRefs(userStore);
+
+const route = useRoute();
+const router = useRouter();
+
+const record = currentUser as user;
+
+const values = reactive({
+  username: "" as string,
+  password: "" as string,
+  email: "" as string,
+  fullname: "" as string,
+  admin: false as boolean,
+  active: false as boolean,
 });
 
-function submit(data: user) {
-  return store
-    .updateUser(<string>record.value.username, data)
-    .then((resp: void | notification | user) => {
-      const val = <user>resp;
-      reset("update", val);
-      router.push({ name: "showUser", params: { userId: val.username } });
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+const rules = {
+  username: {
+    required,
+    minLength: minLength(3),
+    maxLength: maxLength(255),
+  },
+  password: {
+    minLength: minLength(3),
+    maxLength: maxLength(255),
+  },
+  email: {
+    required,
+    email,
+  },
+  fullname: {
+    minLength: minLength(3),
+    maxLength: maxLength(255),
+  },
+};
+
+const v = useVuelidate(rules, values);
+
+async function submit() {
+  const isValid = await v.value.$validate();
+
+  if (isValid) {
+    userStore
+      .updateUser(route.params.userId.toString(), values)
+      .then((response: user | notification) => {
+        if ("status" in response && response.status !== 200) {
+          throw response;
+        }
+
+        const result = <user>response;
+
+        errorStore.addError({
+          kind: "success",
+          message: "Successfully updated",
+        });
+
+        router.push(
+          (route.query.redirect as string) || {
+            name: "showUser",
+            params: { userId: result.username },
+          },
+        );
+      })
+      .catch(() => {});
+  }
 }
 
 onMounted(async () => {
   await router.isReady();
-  store.fetchUser(<string>route.params.userId);
+  userStore.fetchUser(<string>route.params.userId);
 });
 
 watch(record, (newUser) => {
-  reset("update", newUser);
+  values.username = <string>newUser.username;
+  values.email = <string>newUser.email;
+  values.fullname = <string>newUser.fullname;
+  values.admin = <boolean>newUser.admin;
+  values.active = <boolean>newUser.active;
 });
 </script>
 

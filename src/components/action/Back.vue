@@ -1,8 +1,8 @@
 <template>
   <router-link v-slot="{ href }" :to="props.to" custom>
-    <component :is="component" :href="href" class="pl-3">
-      <font-awesome-icon :icon="['fas', 'file']" class="pr-1" />
-      {{ t("actions.show") }}
+    <component :is="component" :href="href" class="ml-3">
+      <font-awesome-icon :icon="['fas', 'arrow-left']" class="pr-1" />
+      {{ t("actions.back") }}
     </component>
   </router-link>
 </template>
@@ -35,6 +35,6 @@ const component = computed(() => {
 
 <script lang="ts">
 export default {
-  name: "ShowAction",
+  name: "BackAction",
 };
 </script>

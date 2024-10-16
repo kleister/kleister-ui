@@ -9,14 +9,17 @@
   "mainnav": {
     "home": "Home",
     "users": "Benutzer",
-    "teams": "Gruppen"
+    "teams": "Gruppen",
+    "logout": "Abmelden"
   },
   "actions": {
     "cancel": "Abbrechen",
+    "back": "Zurück",
     "delete": "Löschen",
     "create": "Anlegen",
     "show": "Details",
-    "update": "Aktualisieren",
+    "update": "Ändern",
+    "refresh": "Aktualisieren",
     "confirm": "Bestätigen",
     "confirm_delete": "Bist du sicher das du {0} löschen möchtest?"
   },
@@ -32,9 +35,9 @@
   "teams": {
     "title": {
       "index": "Gruppen",
-      "show": "Gruppe",
-      "create": "Team anlegen",
-      "update": "{0}"
+      "show": "Gruppe: {0}",
+      "create": "Gruppe anlegen",
+      "update": "Gruppe: {0}"
     },
     "name": "Name",
     "no_entries": "Keine Gruppen gefunden",
@@ -46,12 +49,13 @@
   "users": {
     "title": {
       "index": "Benutzer",
-      "show": "Benutzer",
+      "show": "Benutzer: {0}",
       "create": "Benutzer anlegen",
-      "update": "{0}"
+      "update": "Benutzer: {0}"
     },
     "username": "Benutzer",
     "email": "Email",
+    "fullname": "Name",
     "admin": "Admin",
     "active": "Aktiv",
     "no_entries": "Keine Benutzer gefunden",
@@ -59,5 +63,9 @@
       "question": "Vielleicht möchtest du einen {0}?",
       "link": "Benutzer anlegen"
     }
+  },
+  "checkbox": {
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert"
   }
 }

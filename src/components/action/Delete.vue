@@ -39,10 +39,10 @@
 </template>
 
 <script setup lang="ts">
+import { FwbButton, FwbA, FwbModal } from "flowbite-vue";
+
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
-
-import { FwbButton, FwbA, FwbModal } from "flowbite-vue";
 
 const { t } = useI18n({
   useScope: "global",

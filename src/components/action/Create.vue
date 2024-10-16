@@ -8,10 +8,10 @@
 </template>
 
 <script setup lang="ts">
+import { FwbButton, FwbA } from "flowbite-vue";
+
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-
-import { FwbButton, FwbA } from "flowbite-vue";
 import type { RouteLocationRaw } from "vue-router";
 
 const { t } = useI18n({

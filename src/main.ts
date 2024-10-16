@@ -9,8 +9,8 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-import { plugin } from "@formkit/vue";
-import { formkitConfig } from "../formkit.config";
+import Vueform from "@vueform/vueform";
+import vueformConfig from "../vueform.config";
 
 import enUS from "./locales/en-us.json";
 import deDE from "./locales/de-de.json";
@@ -21,6 +21,8 @@ import router from "./router";
 import App from "./App.vue";
 
 import { useConfigStore } from "./store/config";
+import { useErrorStore } from "./store/error";
+import { useAuthStore } from "./store/auth";
 
 library.add(fab, far, fas);
 
@@ -81,7 +83,7 @@ const i18n = createI18n<false, typeof options>(options);
 
 const app = createApp(App);
 
-app.use(plugin, formkitConfig);
+app.use(Vueform, vueformConfig);
 app.use(pinia);
 app.use(i18n);
 app.use(router);
@@ -91,5 +93,7 @@ app.component("FontAwesomeIcon", FontAwesomeIcon);
 useConfigStore()
   .loadConfig()
   .then(() => {
+    useErrorStore().initialize();
+    useAuthStore().initialize();
     app.mount("#app");
   });

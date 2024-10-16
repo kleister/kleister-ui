@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5 flex">
+  <div class="mt-5 mb-5 flex">
     <fwb-heading tag="h1" class="flex-grow h-16">
       {{ title }}
     </fwb-heading>

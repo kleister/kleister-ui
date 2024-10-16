@@ -1,5 +1,5 @@
 <template>
-  <fwb-breadcrumb solid class="m-5">
+  <fwb-breadcrumb v-if="record" solid>
     <router-link v-slot="{ href }" :to="{ name: 'welcome' }" custom>
       <fwb-breadcrumb-item :href="href" home>{{
         t("breadcrumb.home")
@@ -21,17 +21,22 @@
     </router-link>
   </fwb-breadcrumb>
 
-  <ContentHeader :title="t('teams.title.show', [record.name])">
-    <UpdateAction
-      :to="{ name: 'updateTeam', params: { teamId: record.slug } }"
+  <content-header v-if="record" :title="t('teams.title.show', [record.name])">
+    <back-action :to="{ name: 'teams' }" />
+    <update-action
+      :to="{
+        name: 'updateTeam',
+        params: { teamId: record.slug },
+        query: { redirect: route.fullPath },
+      }"
     />
-    <DeleteAction
+    <delete-action
       :handler="deleteRecord(<string>record.slug)"
       :element="<string>record.name"
     />
-  </ContentHeader>
+  </content-header>
 
-  <fwb-table hoverable class="m-5">
+  <fwb-table v-if="record" hoverable>
     <fwb-table-body>
       <fwb-table-row>
         <fwb-table-head-cell class="w-1/3 text-right">{{
@@ -66,29 +71,36 @@ import {
   FwbTableRow,
 } from "flowbite-vue";
 
-import { ContentHeader, UpdateAction, DeleteAction } from "../../components";
+import {
+  ContentHeader,
+  BackAction,
+  UpdateAction,
+  DeleteAction,
+} from "../../components";
 
-import { onMounted, computed } from "vue";
+import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useI18n } from "vue-i18n";
 import { useTeamStore } from "../../store/teams";
 
-import { useI18n } from "vue-i18n";
-
-const route = useRoute();
-const router = useRouter();
-const store = useTeamStore();
+import type { team } from "../../client/types.gen";
 
 const { t } = useI18n({
   useScope: "global",
 });
 
-const record = computed(() => {
-  return store.currentTeam;
-});
+const teamStore = useTeamStore();
+const { currentTeam } = storeToRefs(teamStore);
+
+const route = useRoute();
+const router = useRouter();
+
+const record = currentTeam as team;
 
 function deleteRecord(slug: string) {
   return () => {
-    store
+    teamStore
       .deleteTeam(slug)
       .then(() => {
         router.push({ name: "teams" });
@@ -101,7 +113,7 @@ function deleteRecord(slug: string) {
 
 onMounted(async () => {
   await router.isReady();
-  store.fetchTeam(<string>route.params.teamId);
+  teamStore.fetchTeam(<string>route.params.teamId);
 });
 </script>
 

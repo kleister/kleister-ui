@@ -1,5 +1,5 @@
 <template>
-  <fwb-breadcrumb solid class="m-5">
+  <fwb-breadcrumb solid>
     <router-link v-slot="{ href }" :to="{ name: 'welcome' }" custom>
       <fwb-breadcrumb-item :href="href" home>{{
         t("breadcrumb.home")
@@ -12,17 +12,32 @@
     </router-link>
   </fwb-breadcrumb>
 
-  <ContentHeader :title="t('users.title.index')">
-    <CreateAction :to="{ name: 'createUser' }" />
-  </ContentHeader>
+  <content-header :title="t('users.title.index')">
+    <fwb-button
+      href="#"
+      color="alternative"
+      class="ml-3"
+      :loading="userStore.loading"
+      @click.prevent="refreshUsers"
+    >
+      <font-awesome-icon :icon="['fas', 'refresh']" class="pr-1" />
+      {{ t("actions.refresh") }}
+    </fwb-button>
+    <create-action :to="{ name: 'createUser' }" />
+  </content-header>
 
-  <fwb-table v-if="getUsers.length > 0" class="m-5" hoverable>
+  <fwb-table v-if="getUsers.users && getUsers.users.length > 0" hoverable>
     <fwb-table-head>
-      <fwb-table-head-cell>{{ t("users.username") }}</fwb-table-head-cell>
+      <fwb-table-head-cell class="md:w-52">{{
+        t("users.username")
+      }}</fwb-table-head-cell>
       <fwb-table-head-cell>{{ t("users.email") }}</fwb-table-head-cell>
-      <fwb-table-head-cell>{{ t("users.fullname") }}</fwb-table-head-cell>
-      <fwb-table-head-cell>{{ t("users.admin") }}</fwb-table-head-cell>
-      <fwb-table-head-cell>{{ t("users.active") }}</fwb-table-head-cell>
+      <fwb-table-head-cell class="w-28">{{
+        t("users.admin")
+      }}</fwb-table-head-cell>
+      <fwb-table-head-cell class="w-28">{{
+        t("users.active")
+      }}</fwb-table-head-cell>
       <fwb-table-head-cell class="w-80"
         ><span class="sr-only">{{
           t("common.actions")
@@ -30,22 +45,43 @@
       >
     </fwb-table-head>
     <fwb-table-body>
-      <fwb-table-row v-for="row in getUsers" :key="row.id">
+      <fwb-table-row v-for="row in getUsers.users" :key="row.id">
         <fwb-table-cell>{{ row.username }}</fwb-table-cell>
         <fwb-table-cell>{{ row.email }}</fwb-table-cell>
-        <fwb-table-cell>{{ row.fullname }}</fwb-table-cell>
-        <fwb-table-cell>{{ row.admin }}</fwb-table-cell>
-        <fwb-table-cell>{{ row.active }}</fwb-table-cell>
         <fwb-table-cell>
-          <ShowAction
+          <font-awesome-icon
+            v-if="row.admin"
+            :icon="['fas', 'check']"
+            :title="t('checkbox.enabled')"
+          />
+          <font-awesome-icon
+            v-else
+            :icon="['fas', 'ban']"
+            :title="t('checkbox.disabled')"
+          />
+        </fwb-table-cell>
+        <fwb-table-cell>
+          <font-awesome-icon
+            v-if="row.active"
+            :icon="['fas', 'check']"
+            :title="t('checkbox.enabled')"
+          />
+          <font-awesome-icon
+            v-else
+            :icon="['fas', 'ban']"
+            :title="t('checkbox.disabled')"
+          />
+        </fwb-table-cell>
+        <fwb-table-cell>
+          <show-action
             :to="{ name: 'showUser', params: { userId: row.username } }"
             tag="link"
           />
-          <UpdateAction
+          <update-action
             :to="{ name: 'updateUser', params: { userId: row.username } }"
             tag="link"
           />
-          <DeleteAction
+          <delete-action
             :handler="deleteRecord(<string>row.username)"
             :element="<string>row.username"
             tag="link"
@@ -87,6 +123,7 @@ import {
   FwbTableHead,
   FwbTableHeadCell,
   FwbTableRow,
+  FwbButton,
 } from "flowbite-vue";
 
 import {
@@ -97,38 +134,48 @@ import {
   DeleteAction,
 } from "../../components";
 
-import { onMounted, computed } from "vue";
-import { useUserStore } from "../../store/users";
-
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
+import { useUserStore } from "../../store/users";
+import { useErrorStore } from "../../store/error";
 
-import type { user } from "../../client/models/user";
-
-const store = useUserStore();
+import type { notification } from "../../client/types.gen";
 
 const { t } = useI18n({
   useScope: "global",
 });
 
-const getUsers = computed(() => {
-  return store.users as user[];
-});
+const userStore = useUserStore();
+const errorStore = useErrorStore();
+const { getUsers } = storeToRefs(userStore);
+
+function refreshUsers() {
+  userStore.fetchUsers();
+}
 
 function deleteRecord(username: string) {
   return () => {
-    store
+    userStore
       .deleteUser(username)
-      .then(() => {
-        store.fetchUsers();
+      .then((response: notification) => {
+        if ("status" in response && response.status !== 200) {
+          throw response;
+        }
+
+        errorStore.addError({
+          kind: "success",
+          message: <string>response.message,
+        });
+
+        userStore.fetchUsers();
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch(() => {});
   };
 }
 
 onMounted(() => {
-  store.fetchUsers();
+  userStore.fetchUsers();
 });
 </script>
 

@@ -1,54 +1,55 @@
 <template>
-  <fwb-footer>
-    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-      Copyright &copy; 2024
-      <a class="hover:underline" href="https://kleister.eu/">Kleister</a>. All
-      rights reserved.
-    </span>
+  <footer
+    class="p-8 bg-white shadow dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+  >
+    <div class="container flex flex-wrap justify-between items-center mx-auto">
+      <span
+        class="block text-sm text-gray-500 sm:text-center dark:text-gray-400"
+      >
+        Copyright &copy; 2024
+        <a class="hover:underline" href="https://kleister.eu/">Kleister</a>. All
+        rights reserved.
+      </span>
 
-    <fwb-footer-link-group>
-      <!-- <fwb-footer-link @click.prevent="switchLocale('de')" href="#">
-        🇩🇪
-      </fwb-footer-link>
-      <fwb-footer-link @click.prevent="switchLocale('en')" href="#">
-        🇺🇸
-      </fwb-footer-link> -->
-      <fwb-footer-link href="https://twitter.com/tboerger">
-        <font-awesome-icon :icon="['fab', 'twitter']" />
-      </fwb-footer-link>
-      <fwb-footer-link href="https://github.com/kleister">
-        <font-awesome-icon :icon="['fab', 'github']" />
-      </fwb-footer-link>
-    </fwb-footer-link-group>
-  </fwb-footer>
+      <fwb-footer-link-group>
+        <fwb-footer-link href="#" @click.prevent="localize('de')">
+          🇩🇪
+        </fwb-footer-link>
+        <fwb-footer-link href="#" @click.prevent="localize('en')">
+          🇺🇸
+        </fwb-footer-link>
+        <fwb-footer-link href="https://twitter.com/tboerger">
+          <font-awesome-icon :icon="['fab', 'twitter']" />
+        </fwb-footer-link>
+        <fwb-footer-link href="https://github.com/kleister">
+          <font-awesome-icon :icon="['fab', 'github']" />
+        </fwb-footer-link>
+      </fwb-footer-link-group>
+    </div>
+  </footer>
 </template>
 
 <script setup lang="ts">
-// import { changeLocale } from "@formkit/vue";
-import { FwbFooter, FwbFooterLink, FwbFooterLinkGroup } from "flowbite-vue";
+import { FwbFooterLink, FwbFooterLinkGroup } from "flowbite-vue";
 
-// import { useI18n } from "vue-i18n";
-// import type { MessageSchema } from "../../locales/schema";
+import { useI18n } from "vue-i18n";
 
-// const { t } = useI18n({
-//   useScope: "global",
-// });
+const { locale } = useI18n({
+  useScope: "global",
+});
 
-// function switchLocale(locale: string) {
-//   changeLocale(locale);
-
-//   switch (locale) {
-//     case 'de': {
-//       i18n.locale.value = 'de-DE';
-//       break;
-//     }
-//     case 'en': {
-//       i18n.locale.value = 'en-US';
-//       break;
-//     }
-//   }
-
-// }
+function localize(val: string) {
+  switch (val) {
+    case "de": {
+      locale.value = "de-DE";
+      break;
+    }
+    case "en": {
+      locale.value = "en-US";
+      break;
+    }
+  }
+}
 </script>
 
 <script lang="ts">

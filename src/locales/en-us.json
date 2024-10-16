@@ -9,14 +9,17 @@
   "mainnav": {
     "home": "Home",
     "users": "Users",
-    "teams": "Teams"
+    "teams": "Teams",
+    "logout": "Logout"
   },
   "actions": {
     "cancel": "Cancel",
+    "back": "Back",
     "delete": "Delete",
     "create": "Create",
     "show": "Show",
     "update": "Update",
+    "refresh": "Refresh",
     "confirm": "Confirm",
     "confirm_delete": "Are you sure you want to delete {0}?"
   },
@@ -32,9 +35,9 @@
   "teams": {
     "title": {
       "index": "Teams",
-      "show": "Team",
+      "show": "Team: {0}",
       "create": "Create team",
-      "update": "{0}"
+      "update": "Team: {0}"
     },
     "name": "Name",
     "no_entries": "No teams found",
@@ -46,12 +49,13 @@
   "users": {
     "title": {
       "index": "Users",
-      "show": "User",
+      "show": "User: {0}",
       "create": "Create user",
-      "update": "{0}"
+      "update": "User: {0}"
     },
     "username": "Username",
     "email": "Email",
+    "fullname": "Fullname",
     "admin": "Admin",
     "active": "Active",
     "no_entries": "No users found",
@@ -59,5 +63,9 @@
       "question": "Maybe you want to {0}?",
       "link": "create a user"
     }
+  },
+  "checkbox": {
+    "enabled": "Enabled",
+    "disabled": "Disabled"
   }
 }

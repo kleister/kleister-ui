@@ -1,5 +1,5 @@
 <template>
-  <fwb-breadcrumb solid class="m-5">
+  <fwb-breadcrumb solid>
     <router-link v-slot="{ href }" :to="{ name: 'welcome' }" custom>
       <fwb-breadcrumb-item :href="href" home>{{
         t("breadcrumb.home")
@@ -12,13 +12,25 @@
     </router-link>
   </fwb-breadcrumb>
 
-  <ContentHeader :title="t('teams.title.index')">
-    <CreateAction :to="{ name: 'createTeam' }" />
-  </ContentHeader>
+  <content-header :title="t('teams.title.index')">
+    <fwb-button
+      href="#"
+      color="alternative"
+      class="ml-3"
+      :loading="teamStore.loading"
+      @click.prevent="refreshTeams"
+    >
+      <font-awesome-icon :icon="['fas', 'refresh']" class="pr-1" />
+      {{ t("actions.refresh") }}
+    </fwb-button>
+    <create-action :to="{ name: 'createTeam' }" />
+  </content-header>
 
-  <fwb-table v-if="getTeams.length > 0" class="m-5" hoverable>
+  <fwb-table v-if="getTeams.teams && getTeams.teams.length > 0" hoverable>
     <fwb-table-head>
-      <fwb-table-head-cell>{{ t("common.slug") }}</fwb-table-head-cell>
+      <fwb-table-head-cell class="md:w-52">{{
+        t("common.slug")
+      }}</fwb-table-head-cell>
       <fwb-table-head-cell>{{ t("teams.name") }}</fwb-table-head-cell>
       <fwb-table-head-cell class="w-80"
         ><span class="sr-only">{{
@@ -27,19 +39,19 @@
       >
     </fwb-table-head>
     <fwb-table-body>
-      <fwb-table-row v-for="row in getTeams" :key="row.id">
+      <fwb-table-row v-for="row in getTeams.teams" :key="row.id">
         <fwb-table-cell>{{ row.slug }}</fwb-table-cell>
         <fwb-table-cell>{{ row.name }}</fwb-table-cell>
         <fwb-table-cell>
-          <ShowAction
+          <show-action
             :to="{ name: 'showTeam', params: { teamId: row.slug } }"
             tag="link"
           />
-          <UpdateAction
+          <update-action
             :to="{ name: 'updateTeam', params: { teamId: row.slug } }"
             tag="link"
           />
-          <DeleteAction
+          <delete-action
             :handler="deleteRecord(<string>row.slug)"
             :element="<string>row.name"
             tag="link"
@@ -81,6 +93,7 @@ import {
   FwbTableHead,
   FwbTableHeadCell,
   FwbTableRow,
+  FwbButton,
 } from "flowbite-vue";
 
 import {
@@ -91,38 +104,48 @@ import {
   DeleteAction,
 } from "../../components";
 
-import { onMounted, computed } from "vue";
-import { useTeamStore } from "../../store/teams";
-
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
+import { useTeamStore } from "../../store/teams";
+import { useErrorStore } from "../../store/error";
 
-import type { team } from "../../client/models/team";
-
-const store = useTeamStore();
+import type { notification } from "../../client/types.gen";
 
 const { t } = useI18n({
   useScope: "global",
 });
 
-const getTeams = computed(() => {
-  return store.teams as team[];
-});
+const teamStore = useTeamStore();
+const errorStore = useErrorStore();
+const { getTeams } = storeToRefs(teamStore);
+
+function refreshTeams() {
+  teamStore.fetchTeams();
+}
 
 function deleteRecord(slug: string) {
   return () => {
-    store
+    teamStore
       .deleteTeam(slug)
-      .then(() => {
-        store.fetchTeams();
+      .then((response: notification) => {
+        if ("status" in response && response.status !== 200) {
+          throw response;
+        }
+
+        errorStore.addError({
+          kind: "success",
+          message: <string>response.message,
+        });
+
+        teamStore.fetchTeams();
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch(() => {});
   };
 }
 
 onMounted(() => {
-  store.fetchTeams();
+  teamStore.fetchTeams();
 });
 </script>
 
