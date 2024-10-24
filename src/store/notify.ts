@@ -27,7 +27,7 @@ export const useNotifyStore = defineStore("notify", {
 
       let timeout = 3000;
 
-      if (error.kind && error.kind === 'danger') {
+      if (error.kind && error.kind === "danger") {
         timeout = 5000;
       }
 
@@ -36,7 +36,7 @@ export const useNotifyStore = defineStore("notify", {
       }, timeout);
     },
     dropAlert(id: number): void {
-      this.alerts = this.alerts.filter(alert => alert.id !== id);
+      this.alerts = this.alerts.filter((alert) => alert.id !== id);
     },
     clearAlerts() {
       this.alerts = [];
