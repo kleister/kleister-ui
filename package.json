@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@hey-api/client-axios": "^0.2.9",
-    "@hey-api/openapi-ts": "^0.55.0",
+    "@hey-api/openapi-ts": "^0.56.0",
     "@typescript-eslint/eslint-plugin": "^8.9.0",
     "@typescript-eslint/parser": "^8.9.0",
     "@vitejs/plugin-vue": "^5.1.4",
