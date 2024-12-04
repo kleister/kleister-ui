@@ -2017,6 +2017,48 @@ export const build_versionSchema = {
   },
 } as const;
 
+export const providersSchema = {
+  title: "Providers",
+  description: "Model to represent list of auth providers",
+  type: "object",
+  properties: {
+    total: {
+      type: "integer",
+      format: "int64",
+    },
+    listing: {
+      type: "array",
+      items: {
+        $ref: "#/components/schemas/provider",
+      },
+    },
+  },
+} as const;
+
+export const providerSchema = {
+  title: "Provider",
+  description: "Model to represent auth provider",
+  type: "object",
+  properties: {
+    name: {
+      type: "string",
+      readOnly: true,
+    },
+    driver: {
+      type: "string",
+      readOnly: true,
+    },
+    display: {
+      type: "string",
+      readOnly: true,
+    },
+    icon: {
+      type: "string",
+      readOnly: true,
+    },
+  },
+} as const;
+
 export const notificationSchema = {
   title: "Notification",
   description: "Generic response for errors and validations",

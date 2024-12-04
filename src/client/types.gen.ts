@@ -720,6 +720,24 @@ export type build_version = {
 };
 
 /**
+ * Model to represent list of auth providers
+ */
+export type providers = {
+  total?: number;
+  listing?: Array<provider>;
+};
+
+/**
+ * Model to represent auth provider
+ */
+export type provider = {
+  readonly name?: string;
+  readonly driver?: string;
+  readonly display?: string;
+  readonly icon?: string;
+};
+
+/**
  * Generic response for errors and validations
  */
 export type notification = {
@@ -777,6 +795,10 @@ export type ExternalCallbackData = {
 export type ExternalCallbackResponse = notification;
 
 export type ExternalCallbackError = unknown | notification;
+
+export type ExternalProvidersResponse = providers;
+
+export type ExternalProvidersError = notification;
 
 export type LoginAuthData = {
   /**

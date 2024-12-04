@@ -12,6 +12,8 @@ import type {
   ExternalCallbackData,
   ExternalCallbackError,
   ExternalCallbackResponse,
+  ExternalProvidersError,
+  ExternalProvidersResponse,
   LoginAuthData,
   LoginAuthError,
   LoginAuthResponse,
@@ -357,6 +359,22 @@ export const externalCallback = <ThrowOnError extends boolean = false>(
   >({
     ...options,
     url: "/auth/{provider}/callback",
+  });
+};
+
+/**
+ * Fetch the available auth providers
+ */
+export const externalProviders = <ThrowOnError extends boolean = false>(
+  options?: Options<unknown, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    ExternalProvidersResponse,
+    ExternalProvidersError,
+    ThrowOnError
+  >({
+    ...options,
+    url: "/auth/providers",
   });
 };
 
