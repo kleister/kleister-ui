@@ -9,7 +9,7 @@ import {
   deleteUser,
   createUser,
   updateUser,
-} from "../client/services.gen";
+} from "../client/sdk.gen";
 
 import type {
   users,

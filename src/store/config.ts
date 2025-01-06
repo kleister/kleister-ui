@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-import { client } from "../client/services.gen";
+import { client } from "../client/sdk.gen";
 
 interface Config {
   apiEndpoint: string;
