@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { InternalAxiosRequestConfig, AxiosError } from "axios";
 
 import { isAxiosError } from "./helpers";
-import { client, loginAuth } from "../client/services.gen";
+import { client, loginAuth } from "../client/sdk.gen";
 import type {
   auth_token,
   LoginAuthResponse,

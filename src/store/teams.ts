@@ -9,7 +9,7 @@ import {
   deleteTeam,
   createTeam,
   updateTeam,
-} from "../client/services.gen";
+} from "../client/sdk.gen";
 
 import type {
   teams,

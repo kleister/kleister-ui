@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { AxiosResponse, AxiosError } from "axios";
 
-import { client } from "../client/services.gen";
+import { client } from "../client/sdk.gen";
 
 type AlertType = "info" | "danger" | "success" | "warning" | "dark";
 
