@@ -9,12 +9,22 @@
           {{ t("mainnav.home") }}
         </fwb-navbar-link>
 
-        <fwb-navbar-link link="/users" link-attr="to" component="router-link">
+        <fwb-navbar-link
+          v-if="authStore.isAdmin"
+          link="/users"
+          link-attr="to"
+          component="router-link"
+        >
           <font-awesome-icon :icon="['fas', 'user']" />
           {{ t("mainnav.users") }}
         </fwb-navbar-link>
 
-        <fwb-navbar-link link="/teams" link-attr="to" component="router-link">
+        <fwb-navbar-link
+          v-if="authStore.isAdmin"
+          link="/teams"
+          link-attr="to"
+          component="router-link"
+        >
           <font-awesome-icon :icon="['fas', 'people-group']" />
           {{ t("mainnav.teams") }}
         </fwb-navbar-link>
@@ -44,7 +54,7 @@ const authStore = useAuthStore();
 
 function logout() {
   authStore.logout();
-  router.push({ name: "login" });
+  router.push({ name: "signin" });
 }
 </script>
 

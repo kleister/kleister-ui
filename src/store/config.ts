@@ -25,10 +25,9 @@ export const useConfigStore = defineStore("config", {
   actions: {
     async loadConfig(): Promise<void> {
       try {
-        const baseURL = window.location.origin + window.location.pathname;
-        const configPath = baseURL.endsWith("/")
-          ? `${baseURL}config.json`
-          : `${baseURL}/config.json`;
+        const configPath = document.baseURI.endsWith("/")
+          ? `${document.baseURI}config.json`
+          : `${document.baseURI}/config.json`;
 
         const response = await axios.get<Config>(configPath);
 

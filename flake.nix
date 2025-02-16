@@ -64,6 +64,15 @@
 
               env = {
                 CGO_ENABLED = "0";
+
+                KLEISTER_UI_LOG_LEVEL = "debug";
+                KLEISTER_UI_LOG_PRETTY = "true";
+                KLEISTER_UI_LOG_COLOR = "true";
+
+                # KLEISTER_UI_SERVER_CERT = ".devenv/state/mkcert/localhost+1.pem";
+                # KLEISTER_UI_SERVER_KEY = ".devenv/state/mkcert/localhost+1-key.pem";
+
+                KLEISTER_UI_SERVER_ASSETS = "static/";
               };
             };
           };

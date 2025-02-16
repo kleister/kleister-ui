@@ -1,81 +1,71 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../store/auth";
-
-import { WelcomeIndex } from "../pages/welcome";
-import { UserIndex, UserCreate, UserShow, UserUpdate } from "../pages/users";
-import { TeamIndex, TeamCreate, TeamShow, TeamUpdate } from "../pages/teams";
-import { ProfileLogin } from "../pages/profile";
 
 const routes = [
   {
     name: "welcome",
     path: "/",
-    component: WelcomeIndex,
+    component: () => import('../pages/welcome/Index.vue'),
     meta: { requiresAuth: true },
   },
   {
     name: "users",
     path: "/users",
-    component: UserIndex,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/users/Index.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "createUser",
     path: "/users/create",
-    component: UserCreate,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/users/Create.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "showUser",
     path: "/users/:userId",
-    component: UserShow,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/users/Show.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "updateUser",
     path: "/users/:userId/update",
-    component: UserUpdate,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/users/Update.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "teams",
     path: "/teams",
-    component: TeamIndex,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/teams/Index.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "createTeam",
     path: "/teams/create",
-    component: TeamCreate,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/teams/Create.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "showTeam",
     path: "/teams/:teamId",
-    component: TeamShow,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/teams/Show.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     name: "updateTeam",
     path: "/teams/:teamId/update",
-    component: TeamUpdate,
-    meta: { requiresAuth: true },
+    component: () => import('../pages/teams/Update.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
 
   {
-    name: "login",
-    path: "/login",
-    component: ProfileLogin,
+    name: "signin",
+    path: "/auth/signin",
+    component: () => import('../pages/profile/Signin.vue'),
   },
 ];
 
-function getBasePath(): string {
-  const { pathname } = window.location;
-  return pathname.substring(0, pathname.lastIndexOf("/") + 1);
-}
-
 const router = createRouter({
-  history: createWebHashHistory(getBasePath()),
+  history: createWebHistory(),
   routes,
 });
 
@@ -83,9 +73,13 @@ router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore();
 
   if (to.meta.requiresAuth && !authStore.isAuthed) {
-    next({ name: "login", query: { redirect: to.fullPath } });
+    next({ name: "signin", query: { redirect: to.fullPath } });
   } else {
-    next();
+    if (to.meta.requiresAdmin && !authStore.isAdmin) {
+      next({ name: "welcome" });
+    } else {
+      next();
+    }
   }
 });
 

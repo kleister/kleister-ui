@@ -1,1 +1,1 @@
-export { default as ProfileLogin } from "./Login.vue";
+export { default as ProfileSignin } from "./Signin.vue";

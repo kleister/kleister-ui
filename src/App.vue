@@ -19,10 +19,6 @@ const authStore = useAuthStore();
 </script>
 
 <style>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html {
   cursor: default;
 }

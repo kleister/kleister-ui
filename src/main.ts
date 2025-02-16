@@ -9,13 +9,8 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-import Vueform from "@vueform/vueform";
-import vueformConfig from "../vueform.config";
-
 import enUS from "./locales/en-us.json";
 import deDE from "./locales/de-de.json";
-
-import "../node_modules/flowbite-vue/dist/index.css";
 
 import router from "./router";
 import App from "./App.vue";
@@ -83,7 +78,6 @@ const i18n = createI18n<false, typeof options>(options);
 
 const app = createApp(App);
 
-app.use(Vueform, vueformConfig);
 app.use(pinia);
 app.use(i18n);
 app.use(router);
