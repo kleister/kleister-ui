@@ -2,6 +2,10 @@
 
 [![General Workflow](https://github.com/kleister/kleister-ui/actions/workflows/general.yml/badge.svg)](https://github.com/kleister/kleister-ui/actions/workflows/general.yml) [![Join the Matrix chat at https://matrix.to/#/#kleister:matrix.org](https://img.shields.io/badge/matrix-%23kleister%3Amatrix.org-7bc9a4.svg)](https://matrix.to/#/#kleister:matrix.org) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3bd77abf377e4796b9323062236390dd)](https://app.codacy.com/gh/kleister/kleister-ui/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Go Reference](https://pkg.go.dev/badge/github.com/kleister/kleister-ui.svg)](https://pkg.go.dev/github.com/kleister/kleister-ui) [![GitHub Repo](https://img.shields.io/badge/github-repo-yellowgreen)](https://github.com/kleister/kleister-ui)
 
+> [!CAUTION]
+> This project is in active development and does not provide any stable release
+> yet, you can expect breaking changes until our first real release!
+
 Within this repository we are building the web interface for our
 [Kleister API][api] server.
 
